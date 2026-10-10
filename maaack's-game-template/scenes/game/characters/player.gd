@@ -3,8 +3,8 @@ extends CharacterBody2D
 
 @export var jump_speed: float = 100
 @export var speed: float = 150
-@export var max_jump_charge_secs: float = 2.0
-@export var jump_charge_multiplier: float = 3.0
+@export var max_jump_charge_secs: float = 1.5
+@export var jump_charge_multiplier: float = 4.0
 
 @export_category("Wind")
 @export var wind_direction_left: bool = false
