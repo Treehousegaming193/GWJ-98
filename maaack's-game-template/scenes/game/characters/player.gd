@@ -77,8 +77,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("wind_change_test"):
-		wind_direction_left = !wind_direction_left
+	#if Input.is_action_just_pressed("wind_change_test"):
+		#wind_direction_left = !wind_direction_left
 	if flashlight.visible:
 		flashlight.rotation = global_position.angle_to_point(get_global_mouse_position())
 
@@ -91,7 +91,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_wind_timer_timeout() -> void:
 	var wind_chance = randi_range(1, 10)
 	print(wind_chance)
-	if wind_chance == 1 or 10:
+	if wind_chance == 1 or wind_chance == 2:
 		wind_direction_left = !wind_direction_left
-	if wind_chance == 2 or 3:
+	elif wind_chance == 3 or wind_chance == 4:
 		wind_speed = randf_range(min_wind_speed, max_wind_speed)

@@ -131,6 +131,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_hx28b")
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." unique_id=993443698]
+visible = false
 rotation = -1.5707964
 node_a = NodePath("..")
 node_b = NodePath("../scarf")
