@@ -17,6 +17,7 @@ var jump_strength: float = 0
 
 @onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
 @onready var wind_indicator: Line2D = %WindIndicator
+@onready var flashlight: PointLight2D = %Flashlight
 
 
 func _ready() -> void:
@@ -68,10 +69,17 @@ func _physics_process(delta: float) -> void:
 	wind_indicator.set_point_position(1, Vector2(wsx, 0))
 
 
-
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("wind_change_test"):
 		wind_direction_left = !wind_direction_left
+	if flashlight.visible:
+		flashlight.rotation = global_position.angle_to_point(get_global_mouse_position())
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_light"):
+		flashlight.visible = !flashlight.visible
+
 
 func _on_wind_timer_timeout() -> void:
 	var wind_chance = randi_range(1, 10)
