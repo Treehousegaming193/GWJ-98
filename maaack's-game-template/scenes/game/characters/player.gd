@@ -91,7 +91,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_wind_timer_timeout() -> void:
 	var wind_chance = randi_range(1, 10)
 	print(wind_chance)
-	if wind_chance == 1:
+	if wind_chance == 1 or 10:
 		wind_direction_left = !wind_direction_left
 	if wind_chance == 2 or 3:
 		wind_speed = randf_range(min_wind_speed, max_wind_speed)
