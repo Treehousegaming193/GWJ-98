@@ -117,6 +117,7 @@ width_curve = SubResource("Curve_hx28b")
 default_color = Color(0.85882354, 0.25490198, 0.38039216, 1)
 
 [node name="WindTimer" type="Timer" parent="." unique_id=720271092]
+wait_time = 2.0
 autostart = true
 
 [node name="scarf" type="CharacterBody2D" parent="." unique_id=1015554850]

@@ -94,4 +94,5 @@ func _on_wind_timer_timeout() -> void:
 	if wind_chance == 1 or wind_chance == 2:
 		wind_direction_left = !wind_direction_left
 	elif wind_chance == 3 or wind_chance == 4:
-		wind_speed = randf_range(min_wind_speed, max_wind_speed)
+		var wind_tween = create_tween()
+		wind_tween.tween_property(self, "wind_speed", randf_range(min_wind_speed, max_wind_speed), 1)
