@@ -5,9 +5,36 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_1wjay"]
 [ext_resource type="PackedScene" uid="uid://fjcitye4ap5c" path="res://scenes/game/characters/player.tscn" id="2_xxrlb"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_3ls1t"]
+[ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="6_1wjay"]
 
 [sub_resource type="Resource" id="Resource_s6150"]
 script = ExtResource("3_3ls1t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmflf"]
+shader = ExtResource("6_1wjay")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 10.0
+shader_parameter/brightnessStar = 1.0
+shader_parameter/shineFrequencyStar = 1.0
+shader_parameter/transparencyStar = 0.499999988824
+shader_parameter/starIterations = 1
+shader_parameter/frequencyBgStar = 0.99599999026407
+shader_parameter/shineFrequencyBgStar = 0.0
+shader_parameter/transparencyBgStar = 0.499999988824
+shader_parameter/colorBackground = Color(0.01773333, 0.0139999995, 0.07, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_1wjay"]
+offsets = PackedFloat32Array(0, 0.68192774)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kmflf"]
+gradient = SubResource("Gradient_1wjay")
+fill_from = Vector2(0, 0.34188035)
+fill_to = Vector2(0, 1)
 
 [node name="Prototype" type="Node2D" unique_id=1069575446]
 
@@ -47,4 +74,23 @@ floor_stop_on_slope = false
 floor_max_angle = 0.87266463
 
 [node name="Darkness" type="CanvasModulate" parent="." unique_id=1292553863]
-color = Color(0.1, 0.1, 0.1, 0.88235295)
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=1693748395]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Sky" unique_id=1064427595]
+material = SubResource("ShaderMaterial_kmflf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizonGradient" type="TextureRect" parent="Sky" unique_id=341558685]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kmflf")
