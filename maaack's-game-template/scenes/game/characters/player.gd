@@ -35,7 +35,9 @@ func _physics_process(delta):
 			velocity.x -= wind_speed
 		if !wind_direction_left:
 			velocity.x += wind_speed
-
- 
-
+	
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("wind_change_test"):
+		wind_direction_left = !wind_direction_left
