@@ -14,3 +14,12 @@ texture = ExtResource("2_hx28b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1883192084]
 shape = SubResource("CapsuleShape2D_kmflf")
+
+[node name="JumpStrengthIndicator" type="Line2D" parent="." unique_id=1871574734]
+unique_name_in_owner = true
+position = Vector2(14, 14)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 4.0
+default_color = Color(1, 0.9529412, 0.57254905, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
