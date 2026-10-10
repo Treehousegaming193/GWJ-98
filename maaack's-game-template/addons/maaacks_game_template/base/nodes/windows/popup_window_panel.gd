@@ -13,7 +13,7 @@ extends WindowPanel
 			process_mode = PROCESS_MODE_INHERIT
 ## If true, opening the window will make the mouse visible if it hidden.
 @export var makes_mouse_visible : bool = true
-## If true, opening the window will grab and remove focus from all other control 
+## If true, opening the window will grab and remove focus from all other control
 ## nodes currently visible in the scene. Closing the window will return the focus
 ## flag to its original state on all the affected nodes.
 @export var exclusive : bool = true
@@ -28,7 +28,7 @@ var _initial_mouse_mode : Input.MouseMode
 var _initial_focus_control
 var _initial_node_focus_modes : Dictionary
 var _initial_tab_focus_modes : Dictionary
-var _scene_tree : SceneTree 
+var _scene_tree : SceneTree
 var _parent_instance : Node
 var _original_parent : Node
 var is_reparenting : bool = false
@@ -62,7 +62,7 @@ func _set_focus_initial() -> void:
 	_initial_tab_focus_modes.clear()
 
 func close() -> void:
-	if is_reparenting: 
+	if is_reparenting:
 		return
 	if not is_opened:
 		return
@@ -82,7 +82,7 @@ func _add_parent_instance_coroutine() -> void:
 		await resized
 	_original_size = size
 	_parent_instance = parent_scene.instantiate()
-	_parent_instance.name = "%s%s" % [name, _parent_instance.name] 
+	_parent_instance.name = "%s%s" % [name, _parent_instance.name]
 	add_sibling.call_deferred(_parent_instance)
 	await _parent_instance.ready
 	if _parent_instance is CanvasLayer:
