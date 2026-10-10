@@ -5,6 +5,10 @@ extends CharacterBody2D
 @export var speed: float = 100
 @export var max_jump_frames: int = 5
 
+@export_category("Wind")
+@export var wind_direction_left: bool = false
+@export var wind_speed: float = 50
+
 var jump_frame_count: int = 0
 
 
@@ -14,6 +18,10 @@ func _physics_process(delta):
 
 	if is_on_floor():
 		velocity = Vector2.ZERO
+		if wind_direction_left:
+			velocity.x -= wind_speed
+		if !wind_direction_left:
+			velocity.x += wind_speed
 		if want_jump:
 			jump_frame_count = 0
 			velocity.x = input_dir.x * speed
