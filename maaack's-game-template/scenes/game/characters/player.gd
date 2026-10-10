@@ -15,9 +15,11 @@ extends CharacterBody2D
 var jump_charge_secs: float = 0
 var jump_strength: float = 0
 
-@onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
-@onready var wind_indicator: Line2D = %WindIndicator
 @onready var flashlight: PointLight2D = %Flashlight
+@onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
+@onready var scarf_visual: Sprite2D = %ScarfVisual
+@onready var visual: Sprite2D = %Visual
+@onready var wind_indicator: Line2D = %WindIndicator
 
 
 func _ready() -> void:
@@ -48,6 +50,9 @@ func _physics_process(delta: float) -> void:
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
+
+	if input_dir:
+		visual.flip_h = input_dir.x < 0
 	move_and_slide()
 
 	# Procedural scarf
@@ -64,9 +69,11 @@ func _physics_process(delta: float) -> void:
 	# (well, you can, it just won't work like you hope, I think)
 	# this is the biggest reason I think character body 2d isn't a good fit.
 	# I would try a line2d and a shader like https://godotshaders.com/shader/2d-simple-animated-flag-shader/
+
 	# for now, just an indicator of direction & speed
 	var wsx: float = 2 * -wind_speed if wind_direction_left else wind_speed
 	wind_indicator.set_point_position(1, Vector2(wsx, 0))
+	scarf_visual.flip_h = !wind_direction_left
 
 
 func _process(_delta: float) -> void:

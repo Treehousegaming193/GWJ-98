@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://fjcitye4ap5c"]
+[gd_scene format=4 uid="uid://fjcitye4ap5c"]
 
 [ext_resource type="Script" uid="uid://c68v5v3qiwoxf" path="res://scenes/game/characters/player.gd" id="1_kwsww"]
 [ext_resource type="Material" uid="uid://cl4gilhpikq76" path="res://scenes/game/characters/unshaded_material.tres" id="2_774tr"]
@@ -6,11 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://bby5x7ajmq8f5" path="res://assets/characters/flashlight_256x256.png" id="3_g7505"]
 [ext_resource type="Script" uid="uid://dk118d3prkqd6" path="res://scenes/game/scripts/scarf.gd" id="3_hx28b"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmflf"]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lho7s"]
+height = 32.0
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_774tr"]
+_data = PackedByteArray("AAADAAUAAAABAAAAYAAAACAAAABGAQAAUklGRj4BAABXRUJQVlA4TDEBAAAvX8AHEFegGrIV6mD0+QZJJLh0EgnJSAAkVF5wgxn4wYUesjlDA5FkbJFHNkGUU2z+A7AvxR3F1xri+AzdNQ1zAMe1bVfNFZkR0H4dQo1MGMHF0u+hT/aR25yqbL/a+Y6Xh8MZQUT/J8D+dPncsuxtMk0+p8ySKUkUZGrlLo8lwMvjo5RSOrq4vGlKXHZuXrbSSUftqnOscpxLgCkWIJ9zDZMESIqtSabRgxDI6YjTDUUKgKMNyamKAXvMjnS6yFClAICthqkWyJturqLivvAeAFNdui+ydRXuz7WW5I5ZRYP0HX1ILPnpPt+aOSoaEe6+WLg7INGI99KzbUNFwV7L2IqybQUEzF6jLMv3iJDBa8R7RARMczBoRHaEihWV/1uSDYsIsyFggITt7AJiw9GfAAA=")
+size_override = Vector2(96, 32)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_dmcgn"]
+_data = PackedByteArray("AAADAAUAAAABAAAAYAAAACAAAACSAAAAUklGRooAAABXRUJQVlA4TH0AAAAvX8AHEBcgFkymmP+RlkAgyV9qmEVi/gP9wG0kyaqzH0QXhewfz39gyv5RXBAik2nTFNyJZUb0fwLwwUPo+bQhBBcNIYS9x2RGMohDPpPkrLS1JMhuZJtSoOTctmwAKLvStBIAUIpJywucKCZcP7Ex3KkUjF2gpPiALJ3+rAA=")
+size_override = Vector2(96, 32)
 
 [sub_resource type="Curve" id="Curve_hx28b"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5060241), -1.8938984, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.8938984, 0.0, 0, 0]
 point_count = 2
 
 [node name="Player" type="CharacterBody2D" unique_id=1904716568 groups=["player"]]
@@ -18,14 +26,71 @@ script = ExtResource("1_kwsww")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1883192084]
 position = Vector2(0, -16)
-shape = SubResource("CapsuleShape2D_kmflf")
+shape = SubResource("CapsuleShape2D_lho7s")
 
 [node name="Visual" type="Sprite2D" parent="." unique_id=1091213167]
+unique_name_in_owner = true
 light_mask = 2
 visibility_layer = 2
+texture_filter = 1
 material = ExtResource("2_774tr")
-texture = ExtResource("2_hx28b")
+texture = SubResource("PortableCompressedTexture2D_774tr")
 offset = Vector2(0, -16)
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"output_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "[Ss]carf",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/characters/frobert.aseprite",
+"source_uid": 8191322159226206083
+}
+metadata/_aseprite_wizard_source_file_hash_ = "382e35ba0657775949a8c1848bd56431"
+
+[node name="ScarfVisual" type="Sprite2D" parent="." unique_id=157296318]
+unique_name_in_owner = true
+texture_filter = 1
+material = ExtResource("2_774tr")
+texture = SubResource("PortableCompressedTexture2D_dmcgn")
+offset = Vector2(0, -16)
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": ["scarf", "Scarf beyond sprite"],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/characters/frobert.aseprite",
+"source_uid": 8191322159226206083
+}
+metadata/_aseprite_wizard_source_file_hash_ = "382e35ba0657775949a8c1848bd56431"
 
 [node name="Flashlight" type="PointLight2D" parent="." unique_id=1854439567]
 unique_name_in_owner = true
@@ -46,7 +111,6 @@ end_cap_mode = 2
 [node name="WindIndicator" type="Line2D" parent="." unique_id=1031576606]
 unique_name_in_owner = true
 material = ExtResource("2_774tr")
-position = Vector2(0, -18)
 points = PackedVector2Array(0, 0, 10, 0)
 width = 8.0
 width_curve = SubResource("Curve_hx28b")
@@ -57,6 +121,7 @@ autostart = true
 
 [node name="scarf" type="CharacterBody2D" parent="." unique_id=1015554850]
 unique_name_in_owner = true
+visible = false
 motion_mode = 1
 script = ExtResource("3_hx28b")
 
