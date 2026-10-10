@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export_category("Wind")
 @export var wind_direction_left: bool = false
 @export var wind_speed: float = 20
+@export var max_wind_speed: float = 30
+@export var min_wind_speed: float = 10
 
 var jump_frame_count: int = 0
 
@@ -46,3 +48,11 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("wind_change_test"):
 		wind_direction_left = !wind_direction_left
+
+func _on_wind_timer_timeout() -> void:
+	var wind_chance = randi_range(1, 10)
+	print(wind_chance)
+	if wind_chance == 1:
+		wind_direction_left = !wind_direction_left
+	if wind_chance == 2 or 3:
+		wind_speed = randf_range(min_wind_speed, max_wind_speed)

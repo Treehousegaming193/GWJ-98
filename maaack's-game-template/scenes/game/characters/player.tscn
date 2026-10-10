@@ -23,3 +23,8 @@ width = 4.0
 default_color = Color(1, 0.9529412, 0.57254905, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="WindTimer" type="Timer" parent="." unique_id=720271092]
+autostart = true
+
+[connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]
