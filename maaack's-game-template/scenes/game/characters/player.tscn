@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c68v5v3qiwoxf" path="res://scenes/game/characters/player.gd" id="1_kwsww"]
 [ext_resource type="Texture2D" uid="uid://dvxeehtslk0f" path="res://assets/characters/prototype_character.png" id="2_hx28b"]
+[ext_resource type="Script" uid="uid://dk118d3prkqd6" path="res://scenes/game/scripts/scarf.gd" id="3_hx28b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmflf"]
 radius = 8.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1904716568]
+[node name="Player" type="CharacterBody2D" unique_id=1904716568 groups=["player"]]
 script = ExtResource("1_kwsww")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1091213167]
@@ -26,5 +27,23 @@ end_cap_mode = 2
 
 [node name="WindTimer" type="Timer" parent="." unique_id=720271092]
 autostart = true
+
+[node name="scarf" type="CharacterBody2D" parent="." unique_id=1015554850]
+unique_name_in_owner = true
+motion_mode = 1
+script = ExtResource("3_hx28b")
+
+[node name="Sprite2D" type="Sprite2D" parent="scarf" unique_id=317321352]
+position = Vector2(33, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_hx28b")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." unique_id=993443698]
+rotation = -1.5707964
+node_a = NodePath("..")
+node_b = NodePath("../scarf")
+length = 10.0
+rest_length = 10.0
+stiffness = 64.0
 
 [connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]

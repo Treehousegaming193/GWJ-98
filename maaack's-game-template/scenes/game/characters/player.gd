@@ -15,6 +15,8 @@ var jump_frame_count: int = 0
 
 @onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
 
+func _ready() -> void:
+	add_to_group("player")
 
 func _physics_process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -38,12 +40,17 @@ func _physics_process(delta):
 			jump_frame_count = max_jump_frames
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
+		%scarf.velocity = Vector2.ZERO
+		%scarf.position = position
 		if wind_direction_left:
 			velocity.x -= wind_speed
+			%scarf.velocity.x = velocity.x + wind_speed
 		if !wind_direction_left:
 			velocity.x += wind_speed
-
+			%scarf.velocity.x = velocity.x - wind_speed
+	
 	move_and_slide()
+	%scarf.move_and_slide()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("wind_change_test"):
