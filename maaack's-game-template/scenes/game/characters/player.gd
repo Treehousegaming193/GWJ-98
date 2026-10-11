@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 			prints("jump_charge_secs", jump_charge_secs, "jump strength", jump_strength)
 			velocity.x = input_dir.x * speed
 			velocity.y -= jump_speed * jump_strength
+			%JumpAudio.play()
 			# rest jump charge
 			jump_charge_secs = 0
 		elif want_charge_jump:
@@ -95,7 +96,7 @@ func _on_wind_timer_timeout() -> void:
 		var wind_tween = create_tween()
 		wind_tween.tween_property(self, "wind_speed", 0, 1)
 		await wind_tween.finished
-		wind_direction_left = !wind_direction_left
+		wind_direction_left = !wind_direction_left 
 		var wind_tween_2 = create_tween()
 		wind_tween_2.tween_property(self, "wind_speed", randf_range(min_wind_speed, max_wind_speed), 1)
 	elif wind_chance == 3 or wind_chance == 4:

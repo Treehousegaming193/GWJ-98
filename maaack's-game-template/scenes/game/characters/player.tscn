@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dvxeehtslk0f" path="res://assets/characters/prototype_character.png" id="2_hx28b"]
 [ext_resource type="Texture2D" uid="uid://bby5x7ajmq8f5" path="res://assets/characters/flashlight_256x256.png" id="3_g7505"]
 [ext_resource type="Script" uid="uid://dk118d3prkqd6" path="res://scenes/game/scripts/scarf.gd" id="3_hx28b"]
+[ext_resource type="AudioStream" uid="uid://dm4txyag57din" path="res://assets/audio/Godot Wild Jam 98 - Frobert Jump B.mp3" id="6_dmcgn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lho7s"]
 height = 32.0
@@ -139,5 +140,9 @@ node_b = NodePath("../scarf")
 length = 10.0
 rest_length = 10.0
 stiffness = 64.0
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064]
+unique_name_in_owner = true
+stream = ExtResource("6_dmcgn")
 
 [connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]
