@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_3ls1t"]
 [ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="6_1wjay"]
 [ext_resource type="Texture2D" uid="uid://sdpd0764d0p0" path="res://assets/environment/signaltower1stem.png" id="6_3ls1t"]
+[ext_resource type="PackedScene" uid="uid://dwci27dw0aoj2" path="res://scenes/death_zone.tscn" id="9_n5tg7"]
 
 [sub_resource type="Resource" id="Resource_s6150"]
 script = ExtResource("3_3ls1t")
@@ -206,3 +207,11 @@ position = Vector2(313, 293)
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_max_angle = 0.87266463
+
+[node name="DeathZone" parent="." unique_id=119917810 instance=ExtResource("9_n5tg7")]
+position = Vector2(1228, 71)
+scale = Vector2(1, 50)
+
+[node name="DeathZone2" parent="." unique_id=615105390 instance=ExtResource("9_n5tg7")]
+position = Vector2(-1, 0)
+scale = Vector2(1, 50)

@@ -44,6 +44,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/maaacks_game_template/plugin.cfg", "res://addons/maaacks_music_controller/plugin.cfg", "res://addons/maaacks_scene_loader/plugin.cfg", "res://addons/maaacks_ui_sound_controller/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/plugin_updater/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

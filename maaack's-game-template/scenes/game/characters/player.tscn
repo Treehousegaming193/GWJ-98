@@ -141,7 +141,7 @@ length = 10.0
 rest_length = 10.0
 stiffness = 64.0
 
-[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064]
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064 groups=["player"]]
 unique_name_in_owner = true
 stream = ExtResource("6_dmcgn")
 
