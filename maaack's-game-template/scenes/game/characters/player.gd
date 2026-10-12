@@ -87,7 +87,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_light"):
 		flashlight.visible = !flashlight.visible
- 
+
 
 func _on_wind_timer_timeout() -> void:
 	var wind_chance = randi_range(1, 10)
@@ -96,7 +96,7 @@ func _on_wind_timer_timeout() -> void:
 		var wind_tween = create_tween()
 		wind_tween.tween_property(self, "wind_speed", 0, 1)
 		await wind_tween.finished
-		wind_direction_left = !wind_direction_left 
+		wind_direction_left = !wind_direction_left
 		var wind_tween_2 = create_tween()
 		wind_tween_2.tween_property(self, "wind_speed", randf_range(min_wind_speed, max_wind_speed), 1)
 	elif wind_chance == 3 or wind_chance == 4:

@@ -1,0 +1,63 @@
+[gd_scene format=4 uid="uid://b4cag405lv1jg"]
+
+[ext_resource type="Script" uid="uid://c8bj60quaabo6" path="res://scenes/game/enemies/bird.gd" id="1_q4v3t"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_wxqxd"]
+_data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAAA8AgAAUklGRjQCAABXRUJQVlA4TCgCAAAvP8APEF9gFgCazhASSSTFIMIZyjTUNJICnZXz7wFkYOAtKa9DQds2TANqJIf4b/MfgPz/JM6l9yYo3hZUk5nAmQFyJIBtIweXNrT3gh1c5RxU2TVPs6WTxm3SYbjOeVvHNX35rmPnHLb2RP6OBAVw/IGI/jtw2zaSFBeapO2ev4DuugaKkuiVQlTIc6IyXbPUUtGakTFFsnGZEllrDMv/4vmsNjw9rcemJUpR6jkZQ7drvZ7bmWl/3eYjJWNDwdZsRDqit4gopVWRHMKWczE9He2v4N85Z4lqFRt1G459OoiOtNSTadZp6/zq3NmEZvtCs/5r9n2+6ShDVNM0t4kdouy/E321IZoRZbhxS4KfNs0GZVW/ds4Z6nU71tTZzC4yNj1hTWO95Xe2Es603XeeTqfwftNZY8xPzrjtdS+INT90FAmOK4PtAuOoJ6JfwUntgynwen/0cBITnCSAnDl67ylsccak4dD7ya+Q0YrsczpamdNz5NrK6In8QBbKW5kjEewUiSBKsj2JNSxVlWuiVZXL/8oitinCO1ixrbjSiD+CWp4C+/8HYjrk6VcICu1zeZb4ECXhqyo1PAAgy8dUGcBLlD9XVYwjGbKGAExDUAdgxHotI1yMKgGRv8ewwPxlULUXz6aVhLioOY+LI8zfRgMCdH1aVDSnl0ZYBrvBGoy98iQ/h4jpzRRNxe4tjtJ1BH0tVVFF8Bu4WAI7UaJqKbEGpXU6AwA=")
+size_override = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kmflf"]
+radius = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmflf"]
+size = Vector2(25, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbcqf"]
+size = Vector2(16, 4)
+
+[node name="Bird" type="CharacterBody2D" unique_id=546600612]
+script = ExtResource("1_q4v3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1703490508]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_wxqxd")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/enemies/kingfisher.aseprite",
+"source_uid": 2803231880387089663
+}
+metadata/_aseprite_wizard_source_file_hash_ = "9095391347628df56e50effdd312dd25"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1398935056]
+shape = SubResource("CircleShape2D_kmflf")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1787123311]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=960193480]
+position = Vector2(2, 25)
+rotation = 0.27052602
+shape = SubResource("RectangleShape2D_kmflf")
+debug_color = Color(0.7, 0, 0, 0.41960785)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" unique_id=1023473303]
+position = Vector2(-22, -8)
+rotation = -0.48694685
+shape = SubResource("RectangleShape2D_gbcqf")
+debug_color = Color(0.7, 0, 0, 0.41960785)

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_3ls1t"]
 [ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="6_1wjay"]
 [ext_resource type="Texture2D" uid="uid://sdpd0764d0p0" path="res://assets/environment/signaltower1stem.png" id="6_3ls1t"]
+[ext_resource type="PackedScene" uid="uid://b4cag405lv1jg" path="res://scenes/game/enemies/bird.tscn" id="8_n5tg7"]
 [ext_resource type="PackedScene" uid="uid://dwci27dw0aoj2" path="res://scenes/death_zone.tscn" id="9_n5tg7"]
 
 [sub_resource type="Resource" id="Resource_s6150"]
@@ -201,6 +202,9 @@ metadata/_aseprite_wizard_config_ = {
 "source_uid": 1305036726067460788
 }
 metadata/_aseprite_wizard_source_file_hash_ = "3f47f75298a64a4569730551fa506a19"
+
+[node name="Bird" parent="." unique_id=546600612 instance=ExtResource("8_n5tg7")]
+position = Vector2(590, -150)
 
 [node name="Player" parent="." unique_id=1904716568 instance=ExtResource("2_xxrlb")]
 position = Vector2(313, 293)
