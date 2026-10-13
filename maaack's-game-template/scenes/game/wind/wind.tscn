@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cqqpwoy6s707y"]
+
+[ext_resource type="Script" uid="uid://cwmmo676k3qdf" path="res://scenes/game/wind/wind.gd" id="1_of4e3"]
+
+[node name="Wind" type="Node2D" unique_id=7802868]
+script = ExtResource("1_of4e3")
+
+[node name="WindTimer" type="Timer" parent="." unique_id=1948671381]
+wait_time = 2.0
+autostart = true

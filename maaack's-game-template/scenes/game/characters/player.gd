@@ -6,12 +6,6 @@ extends CharacterBody2D
 @export var max_jump_charge_secs: float = 1.5
 @export var jump_charge_multiplier: float = 4.0
 
-@export_category("Wind")
-@export var wind_direction_left: bool = false
-@export var wind_speed: float = 20
-@export var max_wind_speed: float = 30
-@export var min_wind_speed: float = 10
-
 var jump_charge_secs: float = 0
 var jump_strength: float = 0
 
@@ -59,12 +53,12 @@ func _physics_process(delta: float) -> void:
 	# Procedural scarf
 	%scarf.velocity = Vector2.ZERO
 	%scarf.position = position
-	if wind_direction_left:
-		velocity.x -= wind_speed
-		%scarf.velocity.x = velocity.x + wind_speed
-	if !wind_direction_left:
-		velocity.x += wind_speed
-		%scarf.velocity.x = velocity.x - wind_speed
+	if Wind.wind_direction_left:
+		velocity.x -= Wind.wind_speed
+		%scarf.velocity.x = velocity.x + Wind.wind_speed
+	if !Wind.wind_direction_left:
+		velocity.x += Wind.wind_speed
+		%scarf.velocity.x = velocity.x - Wind.wind_speed
 	%scarf.move_and_slide()
 	# Can't really parent physics bodies to each other
 	# (well, you can, it just won't work like you hope, I think)
@@ -72,9 +66,9 @@ func _physics_process(delta: float) -> void:
 	# I would try a line2d and a shader like https://godotshaders.com/shader/2d-simple-animated-flag-shader/
 
 	# for now, just an indicator of direction & speed
-	var wsx: float = 2 * -wind_speed if wind_direction_left else wind_speed
+	var wsx: float = 2 * -Wind.wind_speed if Wind.wind_direction_left else Wind.wind_speed
 	wind_indicator.set_point_position(1, Vector2(wsx, 0))
-	scarf_visual.flip_h = !wind_direction_left
+	scarf_visual.flip_h = !Wind.wind_direction_left
 
 
 func _process(_delta: float) -> void:
@@ -87,18 +81,3 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_light"):
 		flashlight.visible = !flashlight.visible
-
-
-func _on_wind_timer_timeout() -> void:
-	var wind_chance = randi_range(1, 10)
-	print(wind_chance)
-	if wind_chance == 1 or wind_chance == 2:
-		var wind_tween = create_tween()
-		wind_tween.tween_property(self, "wind_speed", 0, 1)
-		await wind_tween.finished
-		wind_direction_left = !wind_direction_left
-		var wind_tween_2 = create_tween()
-		wind_tween_2.tween_property(self, "wind_speed", randf_range(min_wind_speed, max_wind_speed), 1)
-	elif wind_chance == 3 or wind_chance == 4:
-		var wind_tween = create_tween()
-		wind_tween.tween_property(self, "wind_speed", randf_range(min_wind_speed, max_wind_speed), 1)

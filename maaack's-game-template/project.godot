@@ -14,6 +14,7 @@ config/name="Godot WIld Jam 98"
 run/main_scene="uid://d3ku87ac3ye83"
 config/features=PackedStringArray("4.7")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -22,6 +23,7 @@ SceneLoader="*res://addons/maaacks_scene_loader/base/nodes/autoloads/scene_loade
 ProjectMusicController="*res://addons/maaacks_music_controller/base/scenes/autoloads/project_music_controller.tscn"
 ProjectUISoundController="*res://addons/maaacks_ui_sound_controller/base/scenes/autoloads/project_ui_sound_controller.tscn"
 PhantomCameraManager="*uid://duq6jhf6unyis"
+Wind="*uid://cqqpwoy6s707y"
 
 [clean_copy_examples]
 
@@ -172,7 +174,10 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
 textures/decals/filter=0
 textures/light_projectors/filter=0
+lightmapping/lightmap_gi/use_bicubic_filter=false
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 environment/defaults/default_environment="res://default_env.tres"

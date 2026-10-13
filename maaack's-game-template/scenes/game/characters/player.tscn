@@ -117,10 +117,6 @@ width = 8.0
 width_curve = SubResource("Curve_hx28b")
 default_color = Color(0.85882354, 0.25490198, 0.38039216, 1)
 
-[node name="WindTimer" type="Timer" parent="." unique_id=720271092]
-wait_time = 2.0
-autostart = true
-
 [node name="scarf" type="CharacterBody2D" parent="." unique_id=1015554850]
 unique_name_in_owner = true
 visible = false
@@ -144,5 +140,3 @@ stiffness = 64.0
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064 groups=["player"]]
 unique_name_in_owner = true
 stream = ExtResource("6_dmcgn")
-
-[connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]
