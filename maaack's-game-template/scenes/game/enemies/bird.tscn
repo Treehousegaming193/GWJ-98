@@ -61,3 +61,13 @@ position = Vector2(-22, -8)
 rotation = -0.48694685
 shape = SubResource("RectangleShape2D_gbcqf")
 debug_color = Color(0.7, 0, 0, 0.41960785)
+
+[node name="RayCast2D_left" type="RayCast2D" parent="." unique_id=1868752651]
+rotation = 0.7853982
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCast2D_right" type="RayCast2D" parent="." unique_id=1151896471]
+rotation = -0.7853982
+hit_from_inside = true
+collide_with_areas = true
