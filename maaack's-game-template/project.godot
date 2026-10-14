@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Godot WIld Jam 98"
-run/main_scene="uid://d3ku87ac3ye83"
+config/name="Godot Wild Jam 98"
+run/main_scene="res://scenes/opening/opening.tscn"
 config/features=PackedStringArray("4.7")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
@@ -52,6 +52,7 @@ player=""
 
 [gui]
 
+theme/custom="res://resources/themes/grow.tres"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
@@ -139,7 +140,7 @@ copy_path="res://"
 disable_install_wizard=true
 disable_install_audio_busses=true
 main_menu_scene_path="res://scenes/menus/main_menu/main_menu.tscn"
-game_scene_path="res://scenes/game/game.tscn"
+game_scene_path="res://scenes/game/levels/prototype.tscn"
 ending_scene_path="res://scenes/end_credits/end_credits.tscn"
 
 [maaacks_music_controller]
@@ -180,4 +181,5 @@ textures/decals/filter=0
 textures/light_projectors/filter=0
 lightmapping/lightmap_gi/use_bicubic_filter=false
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
 environment/defaults/default_environment="res://default_env.tres"
