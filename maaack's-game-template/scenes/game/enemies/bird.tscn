@@ -15,7 +15,11 @@ size = Vector2(25, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbcqf"]
 size = Vector2(16, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru5f0"]
+size = Vector2(37, 49)
+
 [node name="Bird" type="CharacterBody2D" unique_id=546600612]
+collision_layer = 0
 script = ExtResource("1_q4v3t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1703490508]
@@ -49,6 +53,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "9095391347628df56e50effdd312dd25"
 shape = SubResource("CircleShape2D_kmflf")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1787123311]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=960193480]
 position = Vector2(2, 25)
@@ -62,6 +67,11 @@ rotation = -0.48694685
 shape = SubResource("RectangleShape2D_gbcqf")
 debug_color = Color(0.7, 0, 0, 0.41960785)
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Hitbox" unique_id=1932226077]
+position = Vector2(4.5, 2.5)
+shape = SubResource("RectangleShape2D_ru5f0")
+debug_color = Color(1, 0, 0, 0.41960785)
+
 [node name="RayCast2D_left" type="RayCast2D" parent="." unique_id=1868752651]
 rotation = 0.7853982
 hit_from_inside = true
@@ -71,3 +81,5 @@ collide_with_areas = true
 rotation = -0.7853982
 hit_from_inside = true
 collide_with_areas = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

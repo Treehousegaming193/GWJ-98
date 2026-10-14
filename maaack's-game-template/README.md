@@ -55,12 +55,12 @@ Conflicts that are safe to ignore:
 8.  Enable the plugin(s) from the **Project > Project Settings > Plugins** tab.  
     1.  Optionally, enable the following:
         -  *Plugin Updater*
-        -  *Maaack's Scene Loader*
-        -  *Maaack's Music Controller*
-        -  *Maaack's UI Sound Controller*
-    2.  Enable *Maaack's Game Template*.
-    3.  If it's enabled for the first time, the setup wizard will start.  
-        Close the window behind it and complete the setup wizard.  
+		-  *Maaack's Scene Loader*
+		-  *Maaack's Music Controller*
+		-  *Maaack's UI Sound Controller*
+	2.  Enable *Maaack's Game Template*.
+	3.  If it's enabled for the first time, the setup wizard will start.  
+		Close the window behind it and complete the setup wizard.  
 9.  Continue with the [Basic Setup](/addons/maaacks_game_template/docs/BasicSetup.md).
 
 ## Usage
