@@ -17,9 +17,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	velocity_x = -wind_speed if wind_direction_left else wind_speed
-	if velocity_x != last_velocity_x:
-		last_velocity_x = velocity_x
-		print("wind velocity ", velocity_x)
+	#if velocity_x != last_velocity_x:
+		#last_velocity_x = velocity_x
+		#print("wind velocity ", velocity_x)
 
 
 func _on_wind_timer_timeout() -> void:
