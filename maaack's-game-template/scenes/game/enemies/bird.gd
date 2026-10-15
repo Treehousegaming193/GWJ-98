@@ -15,14 +15,22 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	velocity = Vector2.ZERO
+	if !$RayCast2D_left.is_colliding():
+			direction = 1
+	if !$RayCast2D_right.is_colliding():
+			direction = -1
 	if movement:
-		if !$RayCast2D_left.is_colliding():
-				direction = 1
-				$Sprite2D.flip_h = true
-		if !$RayCast2D_right.is_colliding():
-				direction = -1
-				$Sprite2D.flip_h = false
 		position.x += direction * speed * delta
+		if direction > 0:
+			$Sprite2D.flip_h = true
+		else:
+			$Sprite2D.flip_h = false
+	elif !movement:
+		position.x += -direction * speed * delta
+		if -direction > 0:
+			$Sprite2D.flip_h = true
+		else:
+			$Sprite2D.flip_h = false
 
 #func check_for_platform() -> void:
 	#if $RayCast2D.is_colliding():
