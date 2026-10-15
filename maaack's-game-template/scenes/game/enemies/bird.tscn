@@ -82,4 +82,6 @@ rotation = -0.7853982
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]

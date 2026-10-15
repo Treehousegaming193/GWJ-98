@@ -100,6 +100,11 @@ energy = 2.0
 texture = ExtResource("3_g7505")
 offset = Vector2(152, 0)
 
+[node name="Area2D" type="Area2D" parent="Flashlight" unique_id=1800845536]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flashlight/Area2D" unique_id=1033894675]
+polygon = PackedVector2Array(0, 0, 145, -43, 145, 44)
+
 [node name="JumpStrengthIndicator" type="Line2D" parent="." unique_id=1871574734]
 unique_name_in_owner = true
 material = ExtResource("2_774tr")
@@ -138,6 +143,6 @@ length = 10.0
 rest_length = 10.0
 stiffness = 64.0
 
-[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064 groups=["player"]]
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064]
 unique_name_in_owner = true
 stream = ExtResource("6_dmcgn")
