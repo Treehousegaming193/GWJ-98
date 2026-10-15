@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="uid://dlo5inop6ahho"
+
 [autoload]
 
 SceneLoader="*res://addons/maaacks_scene_loader/base/nodes/autoloads/scene_loader/scene_loader.tscn"
@@ -24,6 +28,7 @@ ProjectMusicController="*res://addons/maaacks_music_controller/base/scenes/autol
 ProjectUISoundController="*res://addons/maaacks_ui_sound_controller/base/scenes/autoloads/project_ui_sound_controller.tscn"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 Wind="*uid://cqqpwoy6s707y"
+Audio="*uid://4ynrmxvkbqb6"
 
 [clean_copy_examples]
 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqgflj0umn5eg"
+path="res://.godot/imported/Godot Wild Jam 98 - SFX Menu Hover Over A.mp3-f92b387fc1effb81a0bb643f787674b5.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Godot Wild Jam 98 - SFX Menu Hover Over A.mp3"
+dest_files=["res://.godot/imported/Godot Wild Jam 98 - SFX Menu Hover Over A.mp3-f92b387fc1effb81a0bb643f787674b5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

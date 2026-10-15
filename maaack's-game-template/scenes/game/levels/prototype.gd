@@ -7,3 +7,4 @@ extends Node2D
 func _ready() -> void:
 	# so we can leave the editor bright...
 	darkness.visible = true
+	Audio.play_track("level")
