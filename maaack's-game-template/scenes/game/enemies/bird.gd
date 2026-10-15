@@ -45,7 +45,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	movement = false
+	$LightTimer.start()
 
 
-func _on_hitbox_area_exited(area: Area2D) -> void:
+func _on_light_timer_timeout() -> void:
 	movement = true

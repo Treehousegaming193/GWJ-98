@@ -82,6 +82,10 @@ rotation = -0.7853982
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="LightTimer" type="Timer" parent="." unique_id=1072064294]
+wait_time = 2.0
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_body_entered"]
+[connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]
