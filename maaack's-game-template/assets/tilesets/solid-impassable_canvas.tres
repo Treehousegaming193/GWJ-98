@@ -1,8 +1,6 @@
 [gd_resource type="CanvasTexture" format=3 uid="uid://b8id1vbo0l07c"]
 
 [ext_resource type="Texture2D" uid="uid://cdrep7xcjmvu4" path="res://assets/tilesets/Solid-impassable.png" id="1_8opwl"]
-[ext_resource type="Texture2D" uid="uid://bu33et3ge7dpa" path="res://assets/tilesets/Solid-impassable_n.png" id="2_c8l58"]
 
 [resource]
 diffuse_texture = ExtResource("1_8opwl")
-normal_texture = ExtResource("2_c8l58")

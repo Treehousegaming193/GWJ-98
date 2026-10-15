@@ -96,6 +96,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "382e35ba0657775949a8c1848bd56431"
 [node name="Flashlight" type="PointLight2D" parent="." unique_id=1854439567]
 unique_name_in_owner = true
 position = Vector2(0, -16)
+energy = 2.0
 texture = ExtResource("3_g7505")
 offset = Vector2(152, 0)
 

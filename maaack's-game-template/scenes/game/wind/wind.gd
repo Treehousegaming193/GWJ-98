@@ -8,9 +8,18 @@ extends Node2D
 
 @onready var wind_timer: Timer = $WindTimer
 
+var velocity_x: float
+var last_velocity_x: float = 0
 
 func _ready() -> void:
 	wind_timer.timeout.connect(_on_wind_timer_timeout)
+
+
+func _process(_delta: float) -> void:
+	velocity_x = -wind_speed if wind_direction_left else wind_speed
+	if velocity_x != last_velocity_x:
+		last_velocity_x = velocity_x
+		print("wind velocity ", velocity_x)
 
 
 func _on_wind_timer_timeout() -> void:
