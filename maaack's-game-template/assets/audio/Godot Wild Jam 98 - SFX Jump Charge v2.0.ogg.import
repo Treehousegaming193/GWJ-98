@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dxvjgqoceab6r"
+path="res://.godot/imported/Godot Wild Jam 98 - SFX Jump Charge v2.0.ogg-4be1fae4e7344fb37e499ef8519ba9ce.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Godot Wild Jam 98 - SFX Jump Charge v2.0.ogg"
+dest_files=["res://.godot/imported/Godot Wild Jam 98 - SFX Jump Charge v2.0.ogg-4be1fae4e7344fb37e499ef8519ba9ce.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.88
+bpm=0
+beat_count=0
+bar_beats=4

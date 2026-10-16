@@ -6,20 +6,36 @@ extends Node2D
 @export var max_wind_speed: float = 30
 @export var min_wind_speed: float = 10
 
+var dynamic_wind_sfx_active: bool = false
+
 @onready var wind_timer: Timer = $WindTimer
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 
 var velocity_x: float
 var last_velocity_x: float = 0
 
 func _ready() -> void:
 	wind_timer.timeout.connect(_on_wind_timer_timeout)
+	audio.volume_db = -80
+	_start_audio.call_deferred()
 
 
 func _process(_delta: float) -> void:
 	velocity_x = -wind_speed if wind_direction_left else wind_speed
+	if dynamic_wind_sfx_active:
+		audio.volume_db = remap(wind_speed, min_wind_speed, max_wind_speed, -12, 0)
+		audio.pitch_scale = remap(wind_speed, min_wind_speed, max_wind_speed, 1.0, 1.2)
+
 	#if velocity_x != last_velocity_x:
 		#last_velocity_x = velocity_x
 		#print("wind velocity ", velocity_x)
+
+
+func _start_audio() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(audio, "volume_linear", 0.5, 2.0)
+	tween.tween_property(self, "dynamic_wind_sfx_active", true, 0)
+	audio.play()
 
 
 func _on_wind_timer_timeout() -> void:

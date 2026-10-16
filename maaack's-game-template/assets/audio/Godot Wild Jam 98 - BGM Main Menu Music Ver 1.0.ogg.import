@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cg1v6gcj6mnvl"
+path="res://.godot/imported/Godot Wild Jam 98 - BGM Main Menu Music Ver 1.0.ogg-34c57ae0bff8ba7b5ae496e7e2d8164b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/Godot Wild Jam 98 - BGM Main Menu Music Ver 1.0.ogg"
+dest_files=["res://.godot/imported/Godot Wild Jam 98 - BGM Main Menu Music Ver 1.0.ogg-34c57ae0bff8ba7b5ae496e7e2d8164b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

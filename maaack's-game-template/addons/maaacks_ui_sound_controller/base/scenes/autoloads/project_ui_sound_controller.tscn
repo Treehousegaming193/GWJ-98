@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://cc37235kj4384"]
 
 [ext_resource type="Script" uid="uid://b5oej1q4h7jvh" path="res://addons/maaacks_ui_sound_controller/base/scripts/ui_sound_controller.gd" id="1_dmagn"]
+[ext_resource type="AudioStream" uid="uid://dqgflj0umn5eg" path="res://assets/audio/Godot Wild Jam 98 - SFX Menu Hover Over A.mp3" id="2_cry8p"]
+[ext_resource type="AudioStream" uid="uid://dvqul4d4bdk8l" path="res://assets/audio/Godot Wild Jam 98 - SFX Menu Hover Over B.mp3" id="3_mqjds"]
+[ext_resource type="AudioStream" uid="uid://d3s7o03rx6y3a" path="res://assets/audio/Godot Wild Jam 98 - SFX Menu Hover Over C.mp3" id="4_705aj"]
+[ext_resource type="AudioStream" uid="uid://orscd2ohmw78" path="res://assets/audio/Godot Wild Jam 98 - SFX Option Selected.mp3" id="5_mqjds"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dmcgn"]
+streams_count = 3
+stream_0/stream = ExtResource("2_cry8p")
+stream_1/stream = ExtResource("3_mqjds")
+stream_2/stream = ExtResource("4_705aj")
 
 [node name="ProjectUISoundController" type="Node" unique_id=1329311315]
 script = ExtResource("1_dmagn")
+button_hovered = SubResource("AudioStreamRandomizer_dmcgn")
+button_pressed = ExtResource("5_mqjds")
+tab_hovered = SubResource("AudioStreamRandomizer_dmcgn")
+tab_selected = ExtResource("5_mqjds")
+slider_hovered = SubResource("AudioStreamRandomizer_dmcgn")
+slider_drag_started = ExtResource("5_mqjds")
+line_hovered = SubResource("AudioStreamRandomizer_dmcgn")

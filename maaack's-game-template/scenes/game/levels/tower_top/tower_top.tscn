@@ -1,0 +1,324 @@
+[gd_scene format=4 uid="uid://cmw0jwa2528eb"]
+
+[ext_resource type="AudioStream" uid="uid://j88lq53dmvu7" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Broken.mp3" id="1_rck6e"]
+[ext_resource type="AudioStream" uid="uid://drfnem43xcq37" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Fix Interaction.mp3" id="1_ua05w"]
+[ext_resource type="Script" uid="uid://dtnqklybiu0cj" path="res://scenes/game/levels/tower_top/tower_top.gd" id="1_ukrp1"]
+[ext_resource type="AudioStream" uid="uid://mh456ox4l7tp" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Fixed.mp3" id="3_ukrp1"]
+[ext_resource type="Material" uid="uid://cl4gilhpikq76" path="res://scenes/game/characters/unshaded_material.tres" id="5_xn0ol"]
+[ext_resource type="Texture2D" uid="uid://cb0jocx6q3ise" path="res://addons/input_prompts/icons/default/xbox/xbox_button_color_y.png" id="6_6nhxb"]
+[ext_resource type="Script" uid="uid://xiugbyaytdrk" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="7_axadd"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_1o7qr"]
+_data = PackedByteArray("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")
+size_override = Vector2(640, 340)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmflf"]
+radius = 39.0
+height = 260.0
+
+[sub_resource type="Animation" id="Animation_rck6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SignalBrokenSFX:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SignalFixedSFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SignalBrokenSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ProgressBar:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ProgressBar:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:repaired")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ukrp1"]
+resource_name = "repair"
+length = 3.5000000000000004
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SignalInteractionSFX")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("1_ua05w")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SignalBrokenSFX:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -60.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SignalFixedSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SignalBrokenSFX:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ProgressBar:value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ProgressBar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:repaired")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xn0ol"]
+_data = {
+&"RESET": SubResource("Animation_rck6e"),
+&"repair": SubResource("Animation_ukrp1")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_8uijv"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nbtv0"]
+device = -1
+button_index = 3
+
+[node name="TowerTop" type="Area2D" unique_id=1510611229]
+script = ExtResource("1_ukrp1")
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=473310464]
+texture_filter = 1
+texture = SubResource("PortableCompressedTexture2D_1o7qr")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/signaltower1.aseprite",
+"source_uid": 1305036726067460788
+}
+metadata/_aseprite_wizard_source_file_hash_ = "1032e73f59a8cde82a779666c21bc532"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2006175399]
+position = Vector2(0, 31)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kmflf")
+
+[node name="SignalBrokenSFX" type="AudioStreamPlayer2D" parent="." unique_id=684383131]
+unique_name_in_owner = true
+stream = ExtResource("1_rck6e")
+volume_db = -3.0
+autoplay = true
+max_distance = 800.0
+bus = &"SFX"
+
+[node name="SignalInteractionSFX" type="AudioStreamPlayer2D" parent="." unique_id=1393316882]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SignalFixedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1454646142]
+unique_name_in_owner = true
+stream = ExtResource("3_ukrp1")
+volume_db = 3.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1843364928]
+libraries/ = SubResource("AnimationLibrary_xn0ol")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1262269628]
+visible = false
+material = ExtResource("5_xn0ol")
+custom_minimum_size = Vector2(100, 10)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -27.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActionPromptContainer" type="Control" parent="." unique_id=561413052]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActionPromptShadow" type="TextureRect" parent="ActionPromptContainer" unique_id=616088822]
+modulate = Color(0, 0, 0, 1)
+light_mask = 2
+visibility_layer = 2
+material = ExtResource("5_xn0ol")
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+texture = ExtResource("6_6nhxb")
+stretch_mode = 5
+script = ExtResource("7_axadd")
+action = "interact"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_8uijv"), SubResource("InputEventJoypadButton_nbtv0")])
+metadata/_custom_type_script = "uid://xiugbyaytdrk"
+
+[node name="ActionPrompt" type="TextureRect" parent="ActionPromptContainer" unique_id=393072805]
+light_mask = 2
+visibility_layer = 2
+material = ExtResource("5_xn0ol")
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6nhxb")
+stretch_mode = 5
+script = ExtResource("7_axadd")
+action = "interact"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_8uijv"), SubResource("InputEventJoypadButton_nbtv0")])
+metadata/_custom_type_script = "uid://xiugbyaytdrk"

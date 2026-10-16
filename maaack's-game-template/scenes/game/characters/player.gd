@@ -9,11 +9,14 @@ extends CharacterBody2D
 var jump_charge_secs: float = 0
 var jump_strength: float = 0
 
+var in_debug: bool = false
+
 @onready var flashlight: PointLight2D = %Flashlight
 @onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
 @onready var scarf_visual: Sprite2D = %ScarfVisual
 @onready var visual: Sprite2D = %Visual
 @onready var wind_indicator: Line2D = %WindIndicator
+@onready var jump_charge_audio: AudioStreamPlayer2D = %JumpChargeAudio
 
 
 func _ready() -> void:
@@ -24,6 +27,16 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var want_jump = Input.is_action_just_released("jump")
 	var want_charge_jump = Input.is_action_pressed("jump")
+
+	set_collision_layer_value(1, !in_debug)
+	set_collision_mask_value(1, !in_debug)
+	if in_debug:
+		set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
+		velocity = input_dir * 120
+		move_and_slide()
+		return
+	else:
+		set_motion_mode(CharacterBody2D.MOTION_MODE_GROUNDED)
 
 	if is_on_floor():
 		velocity = Vector2.ZERO
@@ -39,9 +52,12 @@ func _physics_process(delta: float) -> void:
 			# rest jump charge
 			jump_charge_secs = 0
 		elif want_charge_jump:
+			if not jump_charge_audio.playing:
+				jump_charge_audio.play()
 			jump_charge_secs = min(jump_charge_secs + delta, max_jump_charge_secs)
 			jump_strength_indicator.set_point_position(1, Vector2(0, -32 * jump_charge_secs / max_jump_charge_secs))
 	else:
+		jump_charge_audio.stop()
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
@@ -81,3 +97,5 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_light"):
 		flashlight.visible = !flashlight.visible
+	elif event.is_action_pressed("debug") and OS.has_feature("debug"):
+		in_debug = !in_debug
