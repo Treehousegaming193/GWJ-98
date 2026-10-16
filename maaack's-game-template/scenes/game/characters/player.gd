@@ -14,6 +14,7 @@ var jump_strength: float = 0
 @onready var scarf_visual: Sprite2D = %ScarfVisual
 @onready var visual: Sprite2D = %Visual
 @onready var wind_indicator: Line2D = %WindIndicator
+@onready var jump_charge_audio: AudioStreamPlayer2D = %JumpChargeAudio
 
 
 func _ready() -> void:
@@ -39,9 +40,12 @@ func _physics_process(delta: float) -> void:
 			# rest jump charge
 			jump_charge_secs = 0
 		elif want_charge_jump:
+			if not jump_charge_audio.playing:
+				jump_charge_audio.play()
 			jump_charge_secs = min(jump_charge_secs + delta, max_jump_charge_secs)
 			jump_strength_indicator.set_point_position(1, Vector2(0, -32 * jump_charge_secs / max_jump_charge_secs))
 	else:
+		jump_charge_audio.stop()
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)

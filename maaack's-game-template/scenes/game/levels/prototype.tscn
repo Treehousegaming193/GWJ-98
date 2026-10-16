@@ -506,6 +506,9 @@ process_priority = 300
 process_physics_priority = 300
 script = ExtResource("1_ktokn")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1879528554]
+current = true
+
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1895257931 node_paths=PackedStringArray("follow_target")]
 top_level = true
 position = Vector2(313, 293)
