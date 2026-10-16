@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ktokn"]
 [ext_resource type="Script" uid="uid://dno7wkps5r88" path="res://scenes/game/levels/prototype.gd" id="1_s6150"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_1wjay"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_game_template/base/nodes/utilities/pause_menu_controller.gd" id="2_oyx1x"]
 [ext_resource type="PackedScene" uid="uid://fjcitye4ap5c" path="res://scenes/game/characters/player.tscn" id="2_xxrlb"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_3ls1t"]
+[ext_resource type="PackedScene" uid="uid://bpphyypwqyoyl" path="res://addons/maaacks_game_template/examples/scenes/windows/pause_menu.tscn" id="3_v7qi8"]
 [ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="6_1wjay"]
 [ext_resource type="Texture2D" uid="uid://sdpd0764d0p0" path="res://assets/environment/signaltower1stem.png" id="6_3ls1t"]
 [ext_resource type="TileSet" uid="uid://d4dryl8h1ocse" path="res://assets/tilesets/tiles_32x32.tres" id="7_cdlpu"]
@@ -477,6 +479,10 @@ size_override = Vector2(640, 360)
 
 [node name="Prototype" type="Node2D" unique_id=1069575446]
 script = ExtResource("1_s6150")
+
+[node name="PauseMenuController" type="Node" parent="." unique_id=1902203301]
+script = ExtResource("2_oyx1x")
+pause_menu_packed = ExtResource("3_v7qi8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1055276687]
 layer = 0

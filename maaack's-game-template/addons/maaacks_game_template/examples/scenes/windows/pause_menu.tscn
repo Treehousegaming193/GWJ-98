@@ -9,9 +9,9 @@
 process_mode = 3
 custom_minimum_size = Vector2(256, 312)
 offset_left = -128.0
-offset_top = -155.0
+offset_top = -156.0
 offset_right = 128.0
-offset_bottom = 157.0
+offset_bottom = 156.0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource("2_0ln3r")
