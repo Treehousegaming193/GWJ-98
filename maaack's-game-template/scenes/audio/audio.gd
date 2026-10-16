@@ -3,7 +3,8 @@ extends Node
 const MAX_DB: float = -6.0
 
 const TRACKS: Dictionary = {
-	"level": "uid://cu20jvok0tvf7",
+	"level": "res://assets/audio/Godot Wild Jam 98 - BGM Level Music Ver 1.1.ogg",
+	"menu": "res://assets/audio/Godot Wild Jam 98 - BGM Main Menu Music Ver 1.0.ogg"
 }
 
 var active_music_player_index: int = 0
