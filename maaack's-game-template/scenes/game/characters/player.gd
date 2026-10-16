@@ -9,6 +9,8 @@ extends CharacterBody2D
 var jump_charge_secs: float = 0
 var jump_strength: float = 0
 
+var in_debug: bool = false
+
 @onready var flashlight: PointLight2D = %Flashlight
 @onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
 @onready var scarf_visual: Sprite2D = %ScarfVisual
@@ -25,6 +27,16 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var want_jump = Input.is_action_just_released("jump")
 	var want_charge_jump = Input.is_action_pressed("jump")
+
+	set_collision_layer_value(1, !in_debug)
+	set_collision_mask_value(1, !in_debug)
+	if in_debug:
+		set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
+		velocity = input_dir * 80
+		move_and_slide()
+		return
+	else:
+		set_motion_mode(CharacterBody2D.MOTION_MODE_GROUNDED)
 
 	if is_on_floor():
 		velocity = Vector2.ZERO
@@ -85,3 +97,5 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_light"):
 		flashlight.visible = !flashlight.visible
+	elif event.is_action_pressed("debug") and OS.has_feature("debug"):
+		in_debug = !in_debug

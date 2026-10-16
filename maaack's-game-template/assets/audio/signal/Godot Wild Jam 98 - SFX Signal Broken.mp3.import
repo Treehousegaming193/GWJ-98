@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://j88lq53dmvu7"
+path="res://.godot/imported/Godot Wild Jam 98 - SFX Signal Broken.mp3-09ec5bc181b0c654f5605536c1429630.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Broken.mp3"
+dest_files=["res://.godot/imported/Godot Wild Jam 98 - SFX Signal Broken.mp3-09ec5bc181b0c654f5605536c1429630.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
