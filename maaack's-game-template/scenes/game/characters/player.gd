@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	set_collision_mask_value(1, !in_debug)
 	if in_debug:
 		set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
-		velocity = input_dir * 80
+		velocity = input_dir * 120
 		move_and_slide()
 		return
 	else:
