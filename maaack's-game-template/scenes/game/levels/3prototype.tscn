@@ -1,0 +1,657 @@
+[gd_scene format=4 uid="uid://bnj4x47fo3v7p"]
+
+[ext_resource type="Script" uid="uid://dno7wkps5r88" path="res://scenes/game/levels/prototype.gd" id="1_hubyh"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_game_template/base/nodes/utilities/pause_menu_controller.gd" id="2_qhjhg"]
+[ext_resource type="PackedScene" uid="uid://bpphyypwqyoyl" path="res://addons/maaacks_game_template/examples/scenes/windows/pause_menu.tscn" id="3_ngdoi"]
+[ext_resource type="Script" uid="uid://d1qs8kptpja77" path="res://scenes/game/levels/sandstorm_particles.gd" id="4_8f4gx"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_vsfvf"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_5233h"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_uhvyi"]
+[ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="8_2hjbj"]
+[ext_resource type="PackedScene" uid="uid://cmw0jwa2528eb" path="res://scenes/game/levels/tower_top/tower_top.tscn" id="9_lijxv"]
+[ext_resource type="TileSet" uid="uid://cxhu3vtfdk8bq" path="res://assets/tilesets/tiles_64x64.tres" id="10_yy7mb"]
+[ext_resource type="TileSet" uid="uid://d4dryl8h1ocse" path="res://assets/tilesets/tiles_32x32.tres" id="11_7vanx"]
+[ext_resource type="TileSet" uid="uid://mvwjgevdsysy" path="res://assets/tilesets/blockout_tiles_v2_nes_32x32.tres" id="12_h248c"]
+[ext_resource type="PackedScene" uid="uid://b4cag405lv1jg" path="res://scenes/game/enemies/bird.tscn" id="13_8qs7e"]
+[ext_resource type="PackedScene" uid="uid://fjcitye4ap5c" path="res://scenes/game/characters/player.tscn" id="14_hc2ye"]
+[ext_resource type="PackedScene" uid="uid://dwci27dw0aoj2" path="res://scenes/death_zone.tscn" id="15_dlvmh"]
+
+[sub_resource type="Shader" id="Shader_cdlpu"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.7.2.stable's ParticleProcessMaterial.
+
+shader_type particles;
+render_mode disable_force;
+
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float inherit_emitter_velocity_ratio = 0.0;
+uniform float initial_linear_velocity_min;
+uniform float initial_linear_velocity_max;
+uniform float directional_velocity_min;
+uniform float directional_velocity_max;
+uniform float angular_velocity_min;
+uniform float angular_velocity_max;
+uniform float orbit_velocity_min;
+uniform float orbit_velocity_max;
+uniform float radial_velocity_min;
+uniform float radial_velocity_max;
+uniform float linear_accel_min;
+uniform float linear_accel_max;
+uniform float radial_accel_min;
+uniform float radial_accel_max;
+uniform float tangent_accel_min;
+uniform float tangent_accel_max;
+uniform float damping_min;
+uniform float damping_max;
+uniform float initial_angle_min;
+uniform float initial_angle_max;
+uniform float scale_min;
+uniform float scale_max;
+uniform float hue_variation_min;
+uniform float hue_variation_max;
+uniform float anim_speed_min;
+uniform float anim_speed_max;
+uniform float anim_offset_min;
+uniform float anim_offset_max;
+uniform float lifetime_randomness;
+uniform vec3 emission_shape_offset = vec3(0.0);
+uniform vec3 emission_shape_scale = vec3(1.0);
+uniform vec3 velocity_pivot = vec3(0.0);
+uniform vec3 emission_box_extents;
+uniform vec4 color_value : source_color;
+uniform vec3 gravity;
+uniform sampler2D color_initial_ramp : repeat_disable;
+uniform sampler2D alpha_curve : repeat_disable;
+uniform float wind_velocity_x = 0;
+
+vec3 normalize_or_else(vec3 _in, const vec3 _else) {
+	if (_in == vec3(0.0)) {
+		return _else;
+	}
+	return normalize(_in);
+}
+
+vec4 rotate_hue(vec4 current_color, float hue_rot_angle) {
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat =
+			mat4(vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.000, 0.000, 0.000, 1.0)) +
+			mat4(vec4(0.701, -0.587, -0.114, 0.0),
+					vec4(-0.299, 0.413, -0.114, 0.0),
+					vec4(-0.300, -0.588, 0.886, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_c +
+			mat4(vec4(0.168, 0.330, -0.497, 0.0),
+					vec4(-0.328, 0.035, 0.292, 0.0),
+					vec4(1.250, -1.050, -0.203, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_s;
+	return hue_rot_mat * current_color;
+}
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0) {
+		s = 305420679;
+	}
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0) {
+		s += 2147483647;
+	}
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+struct DisplayParameters {
+	vec3 scale;
+	float hue_rotation;
+	float animation_speed;
+	float animation_offset;
+	float lifetime;
+	vec4 color;
+	float emission_texture_position;
+};
+
+struct DynamicsParameters {
+	float angle;
+	float angular_velocity;
+	float initial_velocity_multiplier;
+	float directional_velocity;
+	float radial_velocity;
+	float orbit_velocity;
+};
+
+struct PhysicalParameters {
+	float linear_accel;
+	float radial_accel;
+	float tangent_accel;
+	float damping;
+};
+
+void calculate_initial_physical_params(inout PhysicalParameters params, inout uint alt_seed) {
+	params.linear_accel = mix(linear_accel_min, linear_accel_max, rand_from_seed(alt_seed));
+	params.radial_accel = mix(radial_accel_min, radial_accel_max, rand_from_seed(alt_seed));
+	params.tangent_accel = mix(tangent_accel_min, tangent_accel_max, rand_from_seed(alt_seed));
+	params.damping = mix(damping_min, damping_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_dynamics_params(inout DynamicsParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	params.angle = mix(initial_angle_min, initial_angle_max, rand_from_seed(alt_seed));
+	params.angular_velocity = mix(angular_velocity_min, angular_velocity_max, rand_from_seed(alt_seed));
+	params.initial_velocity_multiplier = mix(initial_linear_velocity_min, initial_linear_velocity_max, rand_from_seed(alt_seed));
+	params.directional_velocity = mix(directional_velocity_min, directional_velocity_max, rand_from_seed(alt_seed));
+	params.radial_velocity = mix(radial_velocity_min, radial_velocity_max, rand_from_seed(alt_seed));
+	params.orbit_velocity = mix(orbit_velocity_min, orbit_velocity_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_display_params(inout DisplayParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	float pi = 3.14159;
+	params.scale = vec3(mix(scale_min, scale_max, rand_from_seed(alt_seed)));
+	params.scale = sign(params.scale) * max(abs(params.scale), 0.001);
+	params.hue_rotation = pi * 2.0 * mix(hue_variation_min, hue_variation_max, rand_from_seed(alt_seed));
+	params.animation_speed = mix(anim_speed_min, anim_speed_max, rand_from_seed(alt_seed));
+	params.animation_offset = mix(anim_offset_min, anim_offset_max, rand_from_seed(alt_seed));
+	params.lifetime = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+	params.color = color_value;
+	params.color *= texture(color_initial_ramp, vec2(rand_from_seed(alt_seed)));
+}
+
+void process_display_param(inout DisplayParameters parameters, float lifetime) {
+	// Compile-time add textures.
+	parameters.color.a *= texture(alpha_curve, vec2(lifetime)).r;
+	parameters.color = rotate_hue(parameters.color, parameters.hue_rotation);
+}
+
+vec3 calculate_initial_position(inout DisplayParameters params, inout uint alt_seed) {
+	float pi = 3.14159;
+	vec3 pos = vec3(0.0);
+	{ // Emission shape.
+		pos = vec3(rand_from_seed(alt_seed) * 2.0 - 1.0, rand_from_seed(alt_seed) * 2.0 - 1.0, rand_from_seed(alt_seed) * 2.0 - 1.0) * emission_box_extents;
+	}
+	return pos * emission_shape_scale + emission_shape_offset;
+}
+
+vec3 process_orbit_displacement(DynamicsParameters param, float lifetime, inout uint alt_seed, mat4 transform, mat4 emission_transform, float delta, float total_lifetime) {
+	if (abs(param.orbit_velocity) < 0.01 || delta < 0.001) {
+		return vec3(0.0);
+	}
+	vec3 displacement = vec3(0.0);
+	float pi = 3.14159;
+	float orbit_amount = param.orbit_velocity;
+	if (orbit_amount != 0.0) {
+		vec3 pos = transform[3].xyz;
+		vec3 org = emission_transform[3].xyz;
+		vec3 diff = pos - org;
+		float ang = orbit_amount * pi * 2.0 * delta;
+		mat2 rot = mat2(vec2(cos(ang), -sin(ang)), vec2(sin(ang), cos(ang)));
+		displacement.xy -= diff.xy;
+		displacement.xy += rot * diff.xy;
+	}
+	return (emission_transform * vec4(displacement / delta, 0.0)).xyz;
+}
+
+vec3 get_random_direction_from_spread(inout uint alt_seed, float spread_angle) {
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+	float spread_rad = spread_angle * degree_to_rad;
+	float angle1_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad;
+	angle1_rad += direction.x != 0.0 ? atan(direction.y, direction.x) : sign(direction.y) * (pi / 2.0);
+	vec3 spread_direction = vec3(cos(angle1_rad), sin(angle1_rad), 0.0);
+	return spread_direction;
+}
+
+vec3 process_radial_displacement(DynamicsParameters param, float lifetime, inout uint alt_seed, mat4 transform, mat4 emission_transform, float delta) {
+	vec3 radial_displacement = vec3(0.0);
+	if (delta < 0.001) {
+		return radial_displacement;
+	}
+	float radial_displacement_multiplier = 1.0;
+	vec3 global_pivot = (emission_transform * vec4(velocity_pivot, 1.0)).xyz;
+	if (length(transform[3].xyz - global_pivot) > 0.01) {
+		radial_displacement = normalize(transform[3].xyz - global_pivot) * radial_displacement_multiplier * param.radial_velocity;
+	} else {
+		radial_displacement = get_random_direction_from_spread(alt_seed, 360.0) * param.radial_velocity;
+	}
+	if (radial_displacement_multiplier * param.radial_velocity < 0.0) {
+		// Prevent inwards velocity to flicker once the point is reached.
+		radial_displacement = normalize(radial_displacement) * min(abs(radial_displacement_multiplier * param.radial_velocity), length(transform[3].xyz - global_pivot) / delta);
+	}
+	return radial_displacement;
+}
+
+void process_physical_parameters(inout PhysicalParameters params, float lifetime_percent) {
+}
+
+void start() {
+	uint base_number = NUMBER;
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	// Reset alt seed?
+	//alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+	process_display_param(params, 0.0);
+	if (rand_from_seed(alt_seed) > AMOUNT_RATIO) {
+		ACTIVE = false;
+	}
+
+	if (RESTART_CUSTOM) {
+		CUSTOM = vec4(0.0);
+		CUSTOM.w = params.lifetime;
+		CUSTOM.x = dynamic_params.angle;
+		USERDATA1.w = 0.0;
+	}
+	if (RESTART_COLOR) {
+		COLOR = params.color;
+	}
+	if (RESTART_ROT_SCALE) {
+		TRANSFORM[0].xyz = vec3(1.0, 0.0, 0.0);
+		TRANSFORM[1].xyz = vec3(0.0, 1.0, 0.0);
+		TRANSFORM[2].xyz = vec3(0.0, 0.0, 1.0);
+	}
+	process_display_param(params, 0.0);
+
+	if (RESTART_POSITION) {
+		TRANSFORM[3].xyz = calculate_initial_position(params, alt_seed);
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	}
+	if (RESTART_VELOCITY) {
+		// We use USERDATA to accumulate our velocities. That way, we can pass both animated velocities and accumulated velocities from
+		// acceleration in VELOCITY, allowing for proper interpolation of animated velocities as well.
+		USERDATA1.xyz = get_random_direction_from_spread(alt_seed, spread) * dynamic_params.initial_velocity_multiplier;
+	} else {
+		USERDATA1.xyz = VELOCITY.xyz;
+	}
+
+	process_display_param(params, 0.0);
+
+	USERDATA1.xyz = (EMISSION_TRANSFORM * vec4(USERDATA1.xyz, 0.0)).xyz;
+	USERDATA1.xyz += EMITTER_VELOCITY * inherit_emitter_velocity_ratio;
+	USERDATA1.z = 0.0;
+	TRANSFORM[3].z = 0.0;
+}
+
+void process() {
+	uint base_number = NUMBER;
+	//if (repeatable) {
+	//	base_number = INDEX;
+	//}
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	bool first_frame = CUSTOM.y == 0.0;
+	CUSTOM.y += DELTA / LIFETIME;
+	CUSTOM.y = mix(CUSTOM.y, 1.0, INTERPOLATE_TO_END);
+	float lifetime_percent = CUSTOM.y / params.lifetime;
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+
+	// Calculate all velocity.
+	vec3 controlled_displacement = vec3(0.0);
+	controlled_displacement += process_orbit_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA, params.lifetime * LIFETIME);
+	controlled_displacement += process_radial_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA);
+
+	process_physical_parameters(physics_params, lifetime_percent);
+	vec3 force;
+	{
+		// Copied from previous version.
+		vec3 pos = TRANSFORM[3].xyz;
+		force = gravity;
+		// Apply linear acceleration.
+		force += length(USERDATA1.xyz) > 0.0 ? normalize(USERDATA1.xyz) * physics_params.linear_accel : vec3(0.0);
+		// Apply radial acceleration.
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * physics_params.radial_accel : vec3(0.0);
+		// Apply tangential acceleration.
+		float tangent_accel_val = physics_params.tangent_accel;
+		force += length(diff.yx) > 0.0 ? vec3(normalize(diff.yx * vec2(-1.0, 1.0)), 0.0) * tangent_accel_val : vec3(0.0);
+		force += ATTRACTOR_FORCE;
+		force.z = 0.0;
+		// Apply attractor forces.
+		USERDATA1.xyz += force * DELTA;
+	}
+	{
+		// Copied from previous version.
+		if (physics_params.damping > 0.0) {
+			float v = length(USERDATA1.xyz);
+			v -= physics_params.damping * DELTA;
+			if (v < 0.0) {
+				USERDATA1.xyz = vec3(0.0);
+			} else {
+				USERDATA1.xyz = normalize(USERDATA1.xyz) * v;
+			}
+		}
+	}
+
+	// Turbulence before limiting.
+	vec3 final_velocity = controlled_displacement + USERDATA1.xyz;
+
+	final_velocity.z = 0.0;
+
+	VELOCITY = final_velocity;
+	VELOCITY.x = wind_velocity_x;
+	TRANSFORM[3].xyz += final_velocity * DELTA;
+
+	process_display_param(params, lifetime_percent);
+
+	float base_angle = dynamic_params.angle;
+	base_angle += CUSTOM.y * LIFETIME * dynamic_params.angular_velocity;
+	CUSTOM.x = base_angle * degree_to_rad;
+	COLOR = params.color;
+
+	TRANSFORM[0] = vec4(cos(CUSTOM.x), -sin(CUSTOM.x), 0.0, 0.0);
+	TRANSFORM[1] = vec4(sin(CUSTOM.x), cos(CUSTOM.x), 0.0, 0.0);
+	TRANSFORM[2] = vec4(0.0, 0.0, 1.0, 0.0);
+	TRANSFORM[3].z = 0.0;
+
+	if (first_frame) {
+		float scale_sign_x = params.scale.x < 0.0 ? -1.0 : 1.0;
+		float scale_sign_y = params.scale.y < 0.0 ? -1.0 : 1.0;
+		float scale_sign_z = params.scale.z < 0.0 ? -1.0 : 1.0;
+		float scale_minimum = 0.001;
+		TRANSFORM[0].xyz *= scale_sign_x * max(abs(params.scale.x), scale_minimum);
+		TRANSFORM[1].xyz *= scale_sign_y * max(abs(params.scale.y), scale_minimum);
+		TRANSFORM[2].xyz *= scale_sign_z * max(abs(params.scale.z), scale_minimum);
+	} else {
+		float scale_minimum = 0.001;
+		TRANSFORM[0].xyz *= max(abs(params.scale.x), scale_minimum);
+		TRANSFORM[1].xyz *= max(abs(params.scale.y), scale_minimum);
+		TRANSFORM[2].xyz *= max(abs(params.scale.z), scale_minimum);
+	}
+
+	CUSTOM.z = params.animation_offset + lifetime_percent * params.animation_speed;
+
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1o7qr"]
+shader = SubResource("Shader_cdlpu")
+shader_parameter/direction = Vector3(0, -1, 0)
+shader_parameter/spread = 0.0
+shader_parameter/flatness = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/initial_linear_velocity_min = 5.0
+shader_parameter/initial_linear_velocity_max = 10.0
+shader_parameter/directional_velocity_min = 0.0
+shader_parameter/directional_velocity_max = 0.0
+shader_parameter/angular_velocity_min = 0.0
+shader_parameter/angular_velocity_max = 0.0
+shader_parameter/orbit_velocity_min = 0.0
+shader_parameter/orbit_velocity_max = 0.0
+shader_parameter/radial_velocity_min = 0.0
+shader_parameter/radial_velocity_max = 0.0
+shader_parameter/linear_accel_min = 0.0
+shader_parameter/linear_accel_max = 0.0
+shader_parameter/radial_accel_min = 0.0
+shader_parameter/radial_accel_max = 0.0
+shader_parameter/tangent_accel_min = 0.0
+shader_parameter/tangent_accel_max = 0.0
+shader_parameter/damping_min = 0.0
+shader_parameter/damping_max = 0.0
+shader_parameter/initial_angle_min = 0.0
+shader_parameter/initial_angle_max = 0.0
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 1.0
+shader_parameter/hue_variation_min = 0.0
+shader_parameter/hue_variation_max = 0.0
+shader_parameter/anim_speed_min = 0.0
+shader_parameter/anim_speed_max = 0.0
+shader_parameter/anim_offset_min = 0.0
+shader_parameter/anim_offset_max = 0.0
+shader_parameter/lifetime_randomness = 0.0
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
+shader_parameter/velocity_pivot = Vector3(0, 0, 0)
+shader_parameter/emission_box_extents = Vector3(1600, 1200, 1)
+shader_parameter/color_value = Color(1, 1, 1, 1)
+shader_parameter/gravity = Vector3(0, 4, 0)
+shader_parameter/wind_velocity_x = 0.0
+
+[sub_resource type="Resource" id="Resource_s6150"]
+script = ExtResource("7_uhvyi")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmflf"]
+shader = ExtResource("8_2hjbj")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 10.0
+shader_parameter/brightnessStar = 1.0
+shader_parameter/shineFrequencyStar = 1.0
+shader_parameter/transparencyStar = 0.499999988824
+shader_parameter/starIterations = 1
+shader_parameter/frequencyBgStar = 0.99599999026407
+shader_parameter/shineFrequencyBgStar = 0.0
+shader_parameter/transparencyBgStar = 0.499999988824
+shader_parameter/colorBackground = Color(0.01773333, 0.0139999995, 0.07, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_1wjay"]
+offsets = PackedFloat32Array(0, 0.68192774)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kmflf"]
+gradient = SubResource("Gradient_1wjay")
+fill_from = Vector2(0, 0.34188035)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_s6150"]
+_data = PackedByteArray("AAADAAUAAAABAAAAgAIAAGgBAABABQAAUklGRjgFAABXRUJQVlA4TCwFAAAvf8JZEB8gECBTkizYIRAghClw5H5E5z+A1thAubVtuZVTfdnOwCFYgXHwuxiUxpM7jQjxEuDYfkzGo+7BYBDkOefeR4kcFcCI/juUZCVsoOU5MU2ePNB+w7vd88N/O/y3w387/LfDfzv8t8N/O/y3w3/7xsDOBv7Dfpmxn3ZrvHMf037aMRzHcaceeUWbFt+H4dldOX7zCN7PFHaghpzPDaxM7E/thz3YIX5QXzHu8Yaf0/ebtRtW9wCZiIzpB09Nu9X2U9Vtvgs2eQnpwza/urpdc8g8Nc0WH4ri9CN776GjZkrdNr9l0u6gG7YHNyVODHwuaYYPa63n9DijaZoxCJrPgGGB1Rb0CB0stcmj50JOZ3hJi6+zh5fpEeCmz/TJd2gGDRya0ypHTB77+w+vpnfbscJ7Bg4rrNesYB4f4BwtoMgEr4m7eDiH+r93V8y2Ab/lz+Bdx3JPiAfxv2mkUL9UdRYb1e5pffufNgbeEqLArAoBBntqKxd6E2cxHNL3+fxBWmVnn83RGcWoX0Jnl9SlD3X1yvXIGV//rluZCEWouSgJDUuoP71EFs2WpHLaP6w7JrJZKBMcalbMYUZ45E8V11QVmlOcH8RGX71fsFRyAXMpVwBJKhTG0FZcUwnVaTbXK3S/5sCxNNulq4BeM1oM3hOfcLQqbodjkitv/wvFcNAJkaUEoGkqJq46saE097VwMzU2zfWSLLKOPo+WF1qwW5iAtPiPlTjAhujDVA1noD2wRE4oopEcQmUaUCgGDk30sMmcacxhrjis7XT2t+OzqF2HsXHoo68koZApyAj+PoYm0m5lWLItcuyKOIQercfFY/jUOCXgyDugUC2rSuFL8J9E5sqmbOdRauE0gGhxIboklH2GqQsc90Jf4t8ZEU3Riav5/sTVGDl3BmYG/mGhzXQWloFOadpAAwmBeQFGS2qCE2elVkqCgUiT3DwdZcnfWyYxYEMI6HNJ2UcHTN3TX2giiJQ0mJiT2aI5pTmUSbIRjMJbjRlNBBGIDgyGp39wQuuAQ6hA1Aq5dFkUsyQpMt6r3giFTnMS3UVCO+VisQmqYqlEwQy2gpCsXY/krBa3Qnx7eFr4F0VGGGpFReCVwwfvz6Yl8o7aWJQgC5RV3tVVzv1oEiMKCVEy3aQnxD1gvKbOGT+pZ04Dl7JJbcyUGMSHU16wkusOulmUsBemh20my+QHk0mnO5CHXbiLf1bq6Hkg8yfRUFKM0RnQufONi13Iq9oML3Yq0ZirVojwxHvBG4w9TUCGv0PyTJ6rZoCJgOFicbNgGkpnICHSe+Gqy5KHU7xZ1/F8VcmjMBoy1kXAUB3LsBwGfY/Kb/tEGStSR3N0KU4ZW4lgCQcg1jgg6xt4DaQjD3F6FN5dkq7scaQuzmqYx95vd8GKqIQDPinpaUemzMyxnwA5DCAOP5O8ICxchDIxZzqe5E4gPiSFP26ZsVPuzVMjAu+1ft57VyKrc43uY4lPD1rwItUvAp6041tE/vydQBMaKq1ousUN/IIm4BbyRl40ffhEEi7P9WpwG8Cjr9bhuOiD0D0JX2BijPLolDuJtrJSYHIyOJyenHEreTuVwZSeIvmPB6sOollc6AOaigbQvMVi693Jv7q4Al+m64PkEFI+JHO901Pu4d5O489YrlqM3qY343IXIT0qgx4+mj9GIYy+91uytcSYfN/O2NFh3ds3YmXVWi5bhIxXc78Wy+2FohS4B2wJV+yR7f24rJ79Lc4InVefsN3zw387/Ldv6MwA")
+size_override = Vector2(640, 360)
+
+[node name="Prototype" type="Node" unique_id=1791909261]
+script = ExtResource("1_hubyh")
+
+[node name="PauseMenuController" type="Node" parent="." unique_id=1902203301]
+script = ExtResource("2_qhjhg")
+pause_menu_packed = ExtResource("3_ngdoi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1055276687]
+layer = 0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer" unique_id=1214440154]
+color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="SandstormParticles" type="GPUParticles2D" parent="CanvasLayer" unique_id=1200530640]
+amount = 12000
+lifetime = 8.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ShaderMaterial_1o7qr")
+script = ExtResource("4_8f4gx")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1171851274]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(313, 220)
+limit_bottom = 400
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=205801438]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("5_vsfvf")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1879528554]
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1895257931 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(313, 293)
+script = ExtResource("6_5233h")
+priority = 1
+follow_mode = 2
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_s6150")
+dead_zone_width = 0.75
+dead_zone_height = 0.25
+draw_limits = true
+limit_bottom = 400
+
+[node name="Darkness" type="CanvasModulate" parent="." unique_id=1292553863]
+visible = false
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=1693748395]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Sky" unique_id=1064427595]
+material = SubResource("ShaderMaterial_kmflf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizonGradient" type="TextureRect" parent="Sky" unique_id=341558685]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kmflf")
+
+[node name="ParallaxFarDunes" type="Parallax2D" parent="." unique_id=1267260339]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(250, -50)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Dunes" type="Sprite2D" parent="ParallaxFarDunes" unique_id=1194060407]
+light_mask = 2
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(320, 160)
+texture = SubResource("PortableCompressedTexture2D_s6150")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/background.aseprite",
+"source_uid": 7451051732235550988
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
+
+[node name="ParallaxNearDunes" type="Parallax2D" parent="." unique_id=877112562]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Dunes" type="Sprite2D" parent="ParallaxNearDunes" unique_id=184058327]
+light_mask = 2
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(320, 160)
+texture = SubResource("PortableCompressedTexture2D_s6150")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/background.aseprite",
+"source_uid": 7451051732235550988
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
+
+[node name="ParallaxPlayArea" type="Parallax2D" parent="." unique_id=988103286]
+
+[node name="TowerTop" parent="ParallaxPlayArea" unique_id=1510611229 instance=ExtResource("9_lijxv")]
+position = Vector2(319, -741)
+
+[node name="BigScaffoldingWithHazards" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=1471152589]
+tile_map_data = PackedByteArray("AAAFAPn/AQAAAAAAAQAEAPn/AQAAAAAAAQA=")
+tile_set = ExtResource("10_yy7mb")
+
+[node name="Scaffolding" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=223490229]
+tile_map_data = PackedByteArray("AAACAAcAAAACAAEAAAADAAcAAAACAAEAAAAEAAcAAAACAAEAAAALAAcAAAACAAEAAAAMAAcAAAACAAEAAAAHAAQAAAACAAEAAAAIAAQAAAACAAEAAAAJAAQAAAACAAEAAAAKAAQAAAACAAEAAAD//wkAAAABAAMAAAAAAAkAAAACAAIAAAABAAkAAAACAAIAAAACAAkAAAACAAIAAAADAAkAAAACAAIAAAAEAAkAAAACAAIAAAAFAAkAAAACAAIAAAAGAAkAAAACAAIAAAAHAAkAAAACAAIAAAAIAAkAAAACAAIAAAAJAAkAAAACAAIAAAAKAAkAAAACAAIAAAALAAkAAAACAAIAAAAMAAkAAAACAAIAAAANAAkAAAACAAIAAAAOAAkAAAACAAIAAAAPAAkAAAACAAIAAAAQAAkAAAACAAIAAAARAAkAAAACAAIAAAASAAkAAAACAAIAAAATAAkAAAACAAIAAAAUAAkAAAADAAMAAAATAAgAAAADAAEAAAASAAgAAAACAAEAAAARAAgAAAACAAEAAAAQAAgAAAACAAEAAAANAAgAAAACAAEAAAAOAAgAAAACAAEAAAAPAAgAAAACAAEAAAAMAAgAAAACAAEAAAALAAgAAAACAAEAAAAKAAgAAAACAAEAAAAJAAgAAAACAAEAAAAIAAgAAAACAAEAAAAHAAgAAAACAAEAAAAGAAgAAAACAAEAAAAFAAgAAAACAAEAAAAEAAgAAAACAAEAAAADAAgAAAACAAEAAAACAAgAAAACAAEAAAABAAgAAAACAAEAAAAAAAgAAAABAAEAAAAAAAYAAAABAAAAAAABAAYAAAACAAEAAAACAAYAAAACAAEAAAADAAYAAAACAAEAAAAEAAYAAAACAAEAAAAFAAYAAAACAAEAAAAGAAYAAAACAAEAAAAHAAYAAAACAAEAAAAIAAYAAAACAAEAAAAJAAYAAAACAAEAAAAKAAYAAAACAAEAAAALAAYAAAACAAEAAAAMAAYAAAACAAEAAAANAAYAAAACAAEAAAAOAAYAAAACAAEAAAAPAAYAAAACAAEAAAAQAAYAAAACAAEAAAARAAYAAAACAAEAAAASAAYAAAACAAEAAAATAAYAAAADAAAAAAASAAUAAAADAAEAAAARAAUAAAACAAEAAAAQAAUAAAACAAEAAAAPAAUAAAACAAEAAAAOAAUAAAACAAEAAAANAAUAAAACAAEAAAAMAAUAAAACAAEAAAALAAUAAAACAAEAAAAKAAUAAAACAAEAAAAJAAUAAAACAAEAAAAIAAUAAAACAAEAAAAHAAUAAAACAAEAAAAGAAUAAAACAAEAAAAFAAUAAAACAAEAAAAEAAUAAAACAAEAAAADAAUAAAACAAEAAAACAAUAAAACAAEAAAABAAUAAAABAAEAAAABAAMAAAABAAAAAAACAAMAAAACAAEAAAADAAMAAAACAAEAAAAEAAMAAAACAAEAAAAFAAMAAAACAAEAAAAGAAMAAAACAAEAAAAHAAMAAAACAAEAAAAIAAMAAAACAAEAAAAJAAMAAAACAAEAAAAKAAMAAAACAAEAAAALAAMAAAACAAEAAAAMAAMAAAACAAEAAAANAAMAAAACAAEAAAAOAAMAAAACAAEAAAAPAAMAAAACAAEAAAAQAAMAAAACAAEAAAARAAMAAAACAAEAAAASAAMAAAADAAAAAAARAAIAAAADAAEAAAAQAAIAAAACAAEAAAAPAAIAAAACAAEAAAAOAAIAAAACAAEAAAANAAIAAAACAAEAAAAMAAIAAAACAAEAAAALAAIAAAACAAEAAAAKAAIAAAACAAEAAAAJAAIAAAACAAEAAAAIAAIAAAACAAEAAAAHAAIAAAACAAEAAAAGAAIAAAACAAEAAAAFAAIAAAACAAAAAAAEAAIAAAACAAAAAAADAAIAAAACAAEAAAACAAIAAAABAAEAAAANAAEAAAACAAEAAAAOAAEAAAACAAEAAAAPAAEAAAACAAEAAAACAAAAAAABAAAAAAADAAAAAAACAAEAAAAGAAAAAAABAAEAAAAHAAAAAAACAAEAAAAIAAAAAAACAAEAAAAJAAAAAAACAAEAAAAKAAAAAAACAAEAAAALAAAAAAACAAEAAAAMAAAAAAACAAEAAAANAAAAAAACAAEAAAAOAAAAAAACAAEAAAAPAAAAAAACAAEAAAAQAAAAAAACAAEAAAARAAAAAAADAAAAAAAQAP//AAADAAEAAAAPAP//AAACAAEAAAAOAP//AAACAAEAAAANAP//AAACAAEAAAAMAP//AAACAAEAAAALAP//AAACAAEAAAAKAP//AAACAAEAAAAJAP//AAACAAEAAAAIAP//AAACAAEAAAAGAP//AAACAAEAAAAFAP//AAABAAIAAAADAP//AAABAAEAAAAJAP7/AAACAAEAAAAKAP7/AAACAAEAAAALAP7/AAACAAEAAAAIAP3/AAACAAEAAAAJAP3/AAACAAEAAAAKAP3/AAACAAEAAAALAP3/AAACAAEAAAAMAP3/AAACAAEAAAANAP3/AAACAAEAAAAOAP3/AAACAAEAAAAPAP3/AAACAAEAAAAQAP3/AAADAAAAAAAPAPz/AAADAAEAAAAOAPz/AAACAAEAAAANAPz/AAACAAEAAAAMAPz/AAACAAEAAAALAPz/AAACAAEAAAAKAPz/AAACAAEAAAAJAPz/AAACAAEAAAAIAPz/AAACAAEAAAAHAPz/AAACAAEAAAAGAPv/AAACAAEAAAAHAPv/AAACAAEAAAAIAPv/AAACAAEAAAAEAPr/AAABAAAAAAAFAPr/AAACAAEAAAAHAPr/AAACAAEAAAAGAPr/AAACAAEAAAAIAPr/AAACAAEAAAAJAPr/AAACAAEAAAAKAPr/AAACAAEAAAALAPr/AAACAAEAAAAMAPr/AAACAAEAAAANAPr/AAACAAEAAAAOAPr/AAACAAEAAAAPAPr/AAADAAAAAAAOAPn/AAADAAEAAAANAPn/AAACAAEAAAAMAPn/AAACAAEAAAALAPn/AAACAAEAAAAKAPn/AAACAAEAAAAJAPn/AAACAAEAAAAIAPn/AAACAAEAAAAHAPn/AAACAAEAAAAGAPn/AAACAAEAAAAFAPn/AAABAAEAAAAJAPj/AAACAAEAAAAKAPj/AAACAAEAAAAFAPf/AAABAAEAAAAIAPf/AAACAAEAAAAJAPf/AAACAAAAAAAKAPf/AAACAAAAAAALAPf/AAACAAEAAAAMAPf/AAACAAEAAAANAPf/AAACAAEAAAAOAPf/AAADAAEAAAAEAPb/AAABAAIAAAAFAPb/AAACAAEAAAAIAPb/AAADAAEAAAALAPb/AAABAAEAAAAMAPb/AAACAAEAAAANAPb/AAACAAEAAAAOAPb/AAACAAEAAAAPAPb/AAADAAIAAAANAPX/AAACAAEAAAAOAPX/AAACAAEAAAAIAPT/AAADAAAAAAADAPP/AAABAAEAAAAHAPP/AAADAAEAAAALAPT/AAABAAAAAAAMAPT/AAACAAEAAAANAPT/AAACAAEAAAAOAPT/AAACAAEAAAAPAPT/AAADAAEAAAAMAPP/AAABAAEAAAANAPP/AAACAAEAAAAOAPP/AAACAAEAAAAPAPP/AAACAAEAAAAQAPP/AAADAAIAAAAOAPL/AAACAAEAAAAPAPL/AAACAAEAAAAMAPH/AAABAAAAAAANAPH/AAACAAEAAAAOAPH/AAACAAEAAAAPAPH/AAACAAEAAAAQAPH/AAADAAEAAAANAPD/AAABAAEAAAAOAPD/AAACAAEAAAAPAPD/AAACAAEAAAAQAPD/AAACAAEAAAARAPD/AAADAAIAAAAPAO//AAACAAEAAAAQAO//AAACAAEAAAADAPH/AAABAAEAAAAEAPH/AAACAAEAAAAFAPH/AAACAAEAAAAGAPH/AAACAAEAAAAHAPH/AAADAAAAAAACAPD/AAABAAIAAAADAPD/AAACAAEAAAAEAPD/AAACAAEAAAAFAPD/AAACAAEAAAAGAPD/AAADAAEAAAADAO//AAACAAEAAAAEAO//AAACAAEAAAACAO7/AAABAAEAAAADAO7/AAACAAEAAAAEAO7/AAACAAEAAAAFAO7/AAACAAEAAAAGAO7/AAADAAEAAAABAO3/AAABAAIAAAACAO3/AAACAAEAAAADAO3/AAACAAEAAAAEAO3/AAACAAEAAAAFAO3/AAACAAEAAAAGAO3/AAADAAEAAAANAO7/AAABAAEAAAAOAO7/AAACAAEAAAAPAO7/AAACAAEAAAAQAO7/AAACAAEAAAARAO7/AAADAAEAAAANAO3/AAABAAEAAAAOAO3/AAACAAEAAAAPAO3/AAACAAEAAAAQAO3/AAACAAEAAAARAO3/AAACAAEAAAASAO3/AAADAAIAAAAPAOz/AAACAAEAAAAQAOz/AAACAAEAAAARAOz/AAACAAEAAAACAOz/AAACAAEAAAADAOz/AAACAAEAAAAEAOz/AAACAAEAAAABAAQAAAABAAEAAAACAAQAAAACAAEAAAADAAQAAAACAAEAAAAEAAQAAAACAAEAAAAFAAQAAAACAAEAAAAGAAQAAAACAAEAAAALAAQAAAACAAEAAAAMAAQAAAACAAEAAAANAAQAAAACAAEAAAAOAAQAAAACAAEAAAAPAAQAAAACAAEAAAAQAAQAAAACAAEAAAARAAQAAAACAAEAAAASAAQAAAADAAEAAAAAAAcAAAABAAEAAAABAAcAAAACAAEAAAATAAcAAAADAAEAAAACAAEAAAABAAEAAAADAAEAAAACAAEAAAAGAAEAAAABAAEAAAAHAAEAAAACAAEAAAAIAAEAAAACAAEAAAAJAAEAAAACAAEAAAAKAAEAAAACAAEAAAALAAEAAAACAAEAAAAMAAEAAAACAAEAAAAQAAEAAAACAAEAAAARAAEAAAADAAEAAAAFAAcAAAACAAEAAAAGAAcAAAACAAEAAAAHAAcAAAACAAEAAAAIAAcAAAACAAEAAAAJAAcAAAACAAEAAAAKAAcAAAACAAEAAAANAAcAAAACAAEAAAAOAAcAAAACAAEAAAAPAAcAAAACAAEAAAAQAAcAAAACAAEAAAARAAcAAAACAAEAAAASAAcAAAACAAEAAAADAP7/AAABAAEAAAAEAP7/AAACAAIAAAAFAP7/AAACAAEAAAAMAP7/AAACAAEAAAANAP7/AAACAAEAAAAOAP7/AAACAAEAAAAPAP7/AAACAAEAAAAQAP7/AAADAAEAAAAJAPv/AAACAAEAAAAKAPv/AAACAAEAAAALAPv/AAACAAEAAAAMAPv/AAACAAEAAAANAPv/AAACAAEAAAAOAPv/AAACAAEAAAAPAPv/AAADAAEAAAAFAPj/AAABAAEAAAAGAPj/AAACAAAAAAAHAPj/AAACAAAAAAAIAPj/AAACAAEAAAALAPj/AAACAAEAAAAMAPj/AAACAAEAAAANAPj/AAACAAEAAAAOAPj/AAADAAEAAAAEAPX/AAABAAEAAAAIAPX/AAADAAEAAAALAPX/AAABAAEAAAAMAPX/AAACAAEAAAAPAPX/AAADAAEAAAAMAPL/AAABAAEAAAANAPL/AAACAAEAAAAQAPL/AAADAAEAAAADAPL/AAABAAEAAAAHAPL/AAADAAEAAAACAO//AAABAAEAAAAFAO//AAACAAEAAAAGAO//AAADAAEAAAANAO//AAABAAEAAAAOAO//AAACAAEAAAARAO//AAADAAEAAAABAOz/AAABAAEAAAAFAOz/AAACAAEAAAAGAOz/AAADAAAAAAANAOz/AAABAAAAAAAOAOz/AAACAAEAAAASAOz/AAADAAEAAAABAOv/AAABAAAAAAACAOv/AAACAAAAAAADAOv/AAACAAAAAAAEAOv/AAACAAAAAAAFAOv/AAADAAAAAAAOAOv/AAABAAAAAAAPAOv/AAACAAAAAAAQAOv/AAACAAAAAAARAOv/AAACAAAAAAASAOv/AAADAAAAAAADAPT/AAABAAIAAAAEAPT/AAACAAEAAAA=")
+tile_set = ExtResource("11_7vanx")
+
+[node name="PrototypeTiles" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=2022790904]
+tile_map_data = PackedByteArray("AAAOAAoAAAABAAUAAAAOAAsAAAAAAAUAAAAPAAoAAAABAAUAAAAPAAsAAAAAAAUAAAAQAAoAAAABAAUAAAAQAAsAAAAAAAUAAAARAAoAAAABAAUAAAARAAsAAAAAAAUAAAASAAoAAAABAAUAAAASAAsAAAAAAAUAAAATAAoAAAABAAUAAAATAAsAAAAAAAUAAAAAAAoAAAABAAUAAAAAAAsAAAAAAAUAAAAAAAwAAAAAAAUAAAABAAoAAAABAAUAAAABAAsAAAAAAAUAAAABAAwAAAAAAAUAAAACAAoAAAABAAUAAAACAAsAAAAAAAUAAAACAAwAAAAAAAUAAAADAAoAAAABAAUAAAADAAsAAAAAAAUAAAADAAwAAAAAAAUAAAAEAAoAAAABAAUAAAAEAAsAAAAAAAUAAAAEAAwAAAAAAAUAAAAFAAoAAAABAAUAAAAFAAsAAAAAAAUAAAAFAAwAAAAAAAUAAAAGAAoAAAABAAUAAAAGAAsAAAAAAAUAAAAGAAwAAAAAAAUAAAAHAAoAAAABAAUAAAAHAAsAAAAAAAUAAAAHAAwAAAAAAAUAAAAIAAoAAAABAAUAAAAIAAsAAAAAAAUAAAAIAAwAAAAAAAUAAAAJAAoAAAABAAUAAAAJAAsAAAAAAAUAAAAJAAwAAAAAAAUAAAAKAAoAAAABAAUAAAAKAAsAAAAAAAUAAAAKAAwAAAAAAAUAAAALAAoAAAABAAUAAAALAAsAAAAAAAUAAAALAAwAAAAAAAUAAAAMAAoAAAABAAUAAAAMAAsAAAAAAAUAAAAMAAwAAAAAAAUAAAANAAoAAAABAAUAAAANAAsAAAAAAAUAAAANAAwAAAAAAAUAAAAOAAwAAAAAAAUAAAAPAAwAAAAAAAUAAAAQAAwAAAAAAAUAAAARAAwAAAAAAAUAAAASAAwAAAAAAAUAAAATAAwAAAAAAAUAAAD//woAAAABAAUAAAD//wsAAAAAAAUAAAD//wwAAAAAAAUAAAD0/wsAAAAAAAUAAAD0/wwAAAAAAAUAAAD1/wsAAAAAAAUAAAD1/wwAAAAAAAUAAAD2/wsAAAAAAAUAAAD2/wwAAAAAAAUAAAD3/wsAAAAAAAUAAAD3/wwAAAAAAAUAAAD4/wsAAAAAAAUAAAD4/wwAAAAAAAUAAAD5/wsAAAAAAAUAAAD5/wwAAAAAAAUAAAD6/wsAAAAAAAUAAAD6/wwAAAAAAAUAAAD7/wsAAAAAAAUAAAD7/wwAAAAAAAUAAAD8/wsAAAAAAAUAAAD8/wwAAAAAAAUAAAD9/wsAAAAAAAUAAAD9/wwAAAAAAAUAAAD+/wsAAAAAAAUAAAD+/wwAAAAAAAUAAAAUAAsAAAAAAAUAAAAUAAwAAAAAAAUAAAAVAAsAAAAAAAUAAAAVAAwAAAAAAAUAAAAWAAsAAAAAAAUAAAAWAAwAAAAAAAUAAAAXAAsAAAAAAAUAAAAXAAwAAAAAAAUAAAAYAAsAAAAAAAUAAAAYAAwAAAAAAAUAAAAZAAsAAAAAAAUAAAAZAAwAAAAAAAUAAAAaAAsAAAAAAAUAAAAaAAwAAAAAAAUAAAAbAAsAAAAAAAUAAAAbAAwAAAAAAAUAAAAcAAsAAAAAAAUAAAAcAAwAAAAAAAUAAAAdAAsAAAAAAAUAAAAdAAwAAAAAAAUAAAAeAAsAAAAAAAUAAAAeAAwAAAAAAAUAAAAfAAsAAAAAAAUAAAAfAAwAAAAAAAUAAAAgAAsAAAAAAAUAAAAgAAwAAAAAAAUAAAAhAAsAAAAAAAUAAAAhAAwAAAAAAAUAAAAiAAsAAAAAAAUAAAAiAAwAAAAAAAUAAAAjAAsAAAAAAAUAAAAjAAwAAAAAAAUAAAAkAAsAAAAAAAUAAAAkAAwAAAAAAAUAAAAlAAsAAAAAAAUAAAAlAAwAAAAAAAUAAAD0/woAAAABAAUAAAD1/woAAAABAAUAAAD2/woAAAABAAUAAAD3/woAAAABAAUAAAD4/woAAAABAAUAAAD5/woAAAABAAUAAAD6/woAAAABAAUAAAD7/woAAAABAAUAAAD8/woAAAABAAUAAAD9/woAAAABAAUAAAD+/woAAAABAAUAAAAUAAoAAAABAAUAAAAVAAoAAAABAAUAAAAWAAoAAAABAAUAAAAXAAoAAAABAAUAAAAYAAoAAAABAAUAAAAZAAoAAAABAAUAAAAaAAoAAAABAAUAAAAbAAoAAAABAAUAAAAcAAoAAAABAAUAAAAdAAoAAAABAAUAAAAeAAoAAAABAAUAAAAfAAoAAAABAAUAAAAgAAoAAAABAAUAAAAhAAoAAAABAAUAAAAiAAoAAAABAAUAAAAjAAoAAAABAAUAAAAkAAoAAAABAAUAAAAlAAoAAAABAAUAAAA=")
+tile_set = ExtResource("12_h248c")
+
+[node name="TowerTiles" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=1598292760]
+tile_map_data = PackedByteArray("AAAAAAYAAQABAAMAAAABAAYAAQACAAMAAAACAAYAAQACAAMAAAADAAYAAQACAAMAAAAEAAYAAQACAAMAAAAFAAYAAQACAAMAAAAHAAYAAQACAAMAAAAIAAYAAQACAAMAAAAJAAYAAQADAAMAAAAKAAYAAgAFAAAAAAALAAYAAgAFAAAAAAAMAAYAAgAFAAAAAAAOAAYAAQACAAMAAAAPAAYAAQACAAMAAAAQAAYAAQACAAMAAAARAAYAAQACAAMAAAASAAYAAQACAAMAAAATAAYAAQADAAMAAAADAAIAAQACAAMAAAAEAAIAAQACAAMAAAAFAAIAAQACAAMAAAAGAAIAAQACAAIAAAAIAAIAAQACAAIAAAAJAAIAAQACAAMAAAAKAAIAAQACAAMAAAALAAIAAQACAAMAAAANAAIAAQACAAMAAAAOAAIAAQACAAMAAAAPAAIAAQACAAMAAAAQAAIAAQACAAMAAAADAP7/AQABAAMAAAAEAP7/AQACAAMAAAAJAP7/AQABAAAAAAALAP7/AgAFAAAAAAAMAP7/AgAFAAAAAAANAP7/AgAFAAAAAAAPAP7/AQACAAMAAAAQAP7/AQADAAMAAAAEAPr/AgAFAAAAAAAFAPr/AgAFAAAAAAAGAPr/AgAFAAAAAAAHAPr/AgAFAAAAAAAIAPr/AQACAAMAAAAJAPr/AQACAAMAAAAKAPr/AQACAAMAAAALAPr/AQACAAMAAAAMAPr/AQACAAMAAAANAPr/AQACAAMAAAAOAPr/AQACAAMAAAAPAPr/AQADAAMAAAALAPX/AQABAAMAAAAMAPX/AgAFAAAAAAANAPX/AgAFAAAAAAAOAPX/AgAFAAAAAAAPAPX/AQADAAMAAAADAPD/AgAFAAAAAAAEAPD/AgAFAAAAAAAFAPD/AQABAAMAAAAGAPD/AQADAAMAAAANAPD/AQABAAMAAAAPAPD/AQACAAMAAAAQAPD/AQACAAMAAAABAOv/AQABAAMAAAAEAOv/AgAFAAAAAAAFAOv/AgAFAAAAAAAHAOv/AQACAAMAAAAIAOv/AQACAAMAAAAJAOv/AQACAAMAAAAKAOv/AQACAAMAAAALAOv/AQACAAMAAAAMAOv/AQACAAMAAAAOAOv/AgAFAAAAAAAPAOv/AgAFAAAAAAAQAOv/AgAFAAAAAAASAOv/AQADAAMAAAAGAAYAAQACAAMAAAANAAYAAQABAAMAAAAMAAIAAQACAAMAAAARAAIAAQADAAMAAAAHAAIAAQACAAIAAAACAAIAAQABAAMAAAAKAP7/AQADAAMAAAAOAP7/AQABAAMAAAAFAP7/AQADAAAAAAAOAPD/AQACAAMAAAARAPD/AQADAAMAAAACAPD/AQAAAAMAAAACAOv/AQADAAMAAAANAOv/AQADAAMAAAARAOv/AQABAAMAAAADAOv/AgAFAAAAAAAGAOv/AQABAAMAAAAFAP//AQABAAIAAAAGAAAAAQABAAEAAAAHAAAAAQACAAAAAAAIAAAAAQADAAEAAAAJAP//AQADAAIAAAAGAP//AQADAAAAAAAIAP//AQABAAAAAAAGAAEAAQABAAEAAAAIAAEAAQADAAEAAAAHAAEAAQACAAEAAAA=")
+tile_set = ExtResource("11_7vanx")
+
+[node name="Bird" parent="." unique_id=546600612 instance=ExtResource("13_8qs7e")]
+position = Vector2(595, 74)
+
+[node name="Player" parent="." unique_id=1904716568 instance=ExtResource("14_hc2ye")]
+position = Vector2(313, 293)
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_max_angle = 0.87266463
+
+[node name="DeathZone" parent="." unique_id=119917810 instance=ExtResource("15_dlvmh")]
+position = Vector2(1228, 71)
+scale = Vector2(1, 50)
+
+[node name="DeathZone2" parent="." unique_id=615105390 instance=ExtResource("15_dlvmh")]
+position = Vector2(-393, 9)
+scale = Vector2(1, 50)
