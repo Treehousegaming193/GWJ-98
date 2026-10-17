@@ -89,9 +89,13 @@ func _physics_process(delta: float) -> void:
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
-
-	if velocity.y > 0 and anim_player.current_animation != ANIM[Anim.FALL]:
-		anim_player.play(ANIM[Anim.FALL])
+		# Apply wind to motion if not on floor
+		if Wind.wind_direction_left:
+			velocity.x -= Wind.wind_speed
+		else:
+			velocity.x += Wind.wind_speed
+		if velocity.y > 0 and anim_player.current_animation != ANIM[Anim.FALL]:
+			anim_player.play(ANIM[Anim.FALL])
 
 	if input_dir:
 		visual.flip_h = input_dir.x < 0
@@ -100,11 +104,9 @@ func _physics_process(delta: float) -> void:
 	# Procedural scarf
 	#%scarf.velocity = Vector2.ZERO
 	#%scarf.position = position
-	#if Wind.wind_direction_left:
-		#velocity.x -= Wind.wind_speed
 		#%scarf.velocity.x = velocity.x + Wind.wind_speed
 	#if !Wind.wind_direction_left:
-		#velocity.x += Wind.wind_speed
+
 		#%scarf.velocity.x = velocity.x - Wind.wind_speed
 	#%scarf.move_and_slide()
 	# Can't really parent physics bodies to each other
