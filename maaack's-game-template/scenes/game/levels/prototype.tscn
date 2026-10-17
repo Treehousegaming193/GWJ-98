@@ -477,7 +477,7 @@ fill_to = Vector2(0, 1)
 _data = PackedByteArray("AAADAAUAAAABAAAAgAIAAGgBAABABQAAUklGRjgFAABXRUJQVlA4TCwFAAAvf8JZEB8gECBTkizYIRAghClw5H5E5z+A1thAubVtuZVTfdnOwCFYgXHwuxiUxpM7jQjxEuDYfkzGo+7BYBDkOefeR4kcFcCI/juUZCVsoOU5MU2ePNB+w7vd88N/O/y3w387/LfDfzv8t8N/O/y3w3/7xsDOBv7Dfpmxn3ZrvHMf037aMRzHcaceeUWbFt+H4dldOX7zCN7PFHaghpzPDaxM7E/thz3YIX5QXzHu8Yaf0/ebtRtW9wCZiIzpB09Nu9X2U9Vtvgs2eQnpwza/urpdc8g8Nc0WH4ri9CN776GjZkrdNr9l0u6gG7YHNyVODHwuaYYPa63n9DijaZoxCJrPgGGB1Rb0CB0stcmj50JOZ3hJi6+zh5fpEeCmz/TJd2gGDRya0ypHTB77+w+vpnfbscJ7Bg4rrNesYB4f4BwtoMgEr4m7eDiH+r93V8y2Ab/lz+Bdx3JPiAfxv2mkUL9UdRYb1e5pffufNgbeEqLArAoBBntqKxd6E2cxHNL3+fxBWmVnn83RGcWoX0Jnl9SlD3X1yvXIGV//rluZCEWouSgJDUuoP71EFs2WpHLaP6w7JrJZKBMcalbMYUZ45E8V11QVmlOcH8RGX71fsFRyAXMpVwBJKhTG0FZcUwnVaTbXK3S/5sCxNNulq4BeM1oM3hOfcLQqbodjkitv/wvFcNAJkaUEoGkqJq46saE097VwMzU2zfWSLLKOPo+WF1qwW5iAtPiPlTjAhujDVA1noD2wRE4oopEcQmUaUCgGDk30sMmcacxhrjis7XT2t+OzqF2HsXHoo68koZApyAj+PoYm0m5lWLItcuyKOIQercfFY/jUOCXgyDugUC2rSuFL8J9E5sqmbOdRauE0gGhxIboklH2GqQsc90Jf4t8ZEU3Riav5/sTVGDl3BmYG/mGhzXQWloFOadpAAwmBeQFGS2qCE2elVkqCgUiT3DwdZcnfWyYxYEMI6HNJ2UcHTN3TX2giiJQ0mJiT2aI5pTmUSbIRjMJbjRlNBBGIDgyGp39wQuuAQ6hA1Aq5dFkUsyQpMt6r3giFTnMS3UVCO+VisQmqYqlEwQy2gpCsXY/krBa3Qnx7eFr4F0VGGGpFReCVwwfvz6Yl8o7aWJQgC5RV3tVVzv1oEiMKCVEy3aQnxD1gvKbOGT+pZ04Dl7JJbcyUGMSHU16wkusOulmUsBemh20my+QHk0mnO5CHXbiLf1bq6Hkg8yfRUFKM0RnQufONi13Iq9oML3Yq0ZirVojwxHvBG4w9TUCGv0PyTJ6rZoCJgOFicbNgGkpnICHSe+Gqy5KHU7xZ1/F8VcmjMBoy1kXAUB3LsBwGfY/Kb/tEGStSR3N0KU4ZW4lgCQcg1jgg6xt4DaQjD3F6FN5dkq7scaQuzmqYx95vd8GKqIQDPinpaUemzMyxnwA5DCAOP5O8ICxchDIxZzqe5E4gPiSFP26ZsVPuzVMjAu+1ft57VyKrc43uY4lPD1rwItUvAp6041tE/vydQBMaKq1ousUN/IIm4BbyRl40ffhEEi7P9WpwG8Cjr9bhuOiD0D0JX2BijPLolDuJtrJSYHIyOJyenHEreTuVwZSeIvmPB6sOollc6AOaigbQvMVi693Jv7q4Al+m64PkEFI+JHO901Pu4d5O489YrlqM3qY343IXIT0qgx4+mj9GIYy+91uytcSYfN/O2NFh3ds3YmXVWi5bhIxXc78Wy+2FohS4B2wJV+yR7f24rJ79Lc4InVefsN3zw387/Ldv6MwA")
 size_override = Vector2(640, 360)
 
-[node name="Prototype" type="Node2D" unique_id=1069575446]
+[node name="Prototype" type="Node" unique_id=1791909261]
 script = ExtResource("1_s6150")
 
 [node name="PauseMenuController" type="Node" parent="." unique_id=1902203301]
@@ -510,7 +510,6 @@ process_physics_priority = 300
 script = ExtResource("1_ktokn")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera2D" unique_id=1879528554]
-current = true
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1895257931 node_paths=PackedStringArray("follow_target")]
 top_level = true
@@ -641,7 +640,7 @@ tile_map_data = PackedByteArray("AAABAAcAAQADAAMAAAACAAcAAgAFAAAAAAADAAcAAgAFAAA
 tile_set = ExtResource("7_cdlpu")
 
 [node name="Bird" parent="." unique_id=546600612 instance=ExtResource("8_n5tg7")]
-position = Vector2(557, 96)
+position = Vector2(595, 74)
 
 [node name="Player" parent="." unique_id=1904716568 instance=ExtResource("2_xxrlb")]
 position = Vector2(313, 293)
