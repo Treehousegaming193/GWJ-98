@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://drqrwghj0hhtu"]
 
 [ext_resource type="Texture2D" uid="uid://dvxeehtslk0f" path="res://assets/characters/prototype_character.png" id="1_52t7l"]
+[ext_resource type="Texture2D" uid="uid://canlvx0ftc57m" path="res://assets/map/worldmap (blueprint).png" id="1_sjokj"]
+[ext_resource type="Script" uid="uid://b6yqngbto7ifw" path="res://scenes/menus/level_select_menu/level_button.gd" id="3_meyqc"]
+[ext_resource type="PackedScene" uid="uid://d3ku87ac3ye83" path="res://scenes/game/levels/prototype.tscn" id="4_sjokj"]
+[ext_resource type="PackedScene" uid="uid://dbnh4fiy7xt7g" path="res://scenes/game/levels/2prototype.tscn" id="5_550iq"]
+[ext_resource type="PackedScene" uid="uid://bnj4x47fo3v7p" path="res://scenes/game/levels/3prototype.tscn" id="6_hkdsq"]
+[ext_resource type="PackedScene" uid="uid://w2nxstqcsg74" path="res://scenes/game/levels/4prototype.tscn" id="7_7knq8"]
 
 [node name="Control" type="Control" unique_id=541711488]
 layout_mode = 3
@@ -10,6 +16,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Worldmap(blueprint)" type="Sprite2D" parent="." unique_id=881531493]
+position = Vector2(315, 190)
+texture = ExtResource("1_sjokj")
+
 [node name="Level1" type="TextureButton" parent="." unique_id=687347615]
 layout_mode = 0
 offset_left = 91.0
@@ -17,6 +27,8 @@ offset_top = 92.0
 offset_right = 131.0
 offset_bottom = 132.0
 texture_normal = ExtResource("1_52t7l")
+script = ExtResource("3_meyqc")
+level = ExtResource("4_sjokj")
 
 [node name="Level2" type="TextureButton" parent="." unique_id=1586266474]
 layout_mode = 0
@@ -25,6 +37,8 @@ offset_top = 224.0
 offset_right = 292.0
 offset_bottom = 264.0
 texture_normal = ExtResource("1_52t7l")
+script = ExtResource("3_meyqc")
+level = ExtResource("5_550iq")
 
 [node name="Level3" type="TextureButton" parent="." unique_id=1424955469]
 layout_mode = 0
@@ -33,6 +47,8 @@ offset_top = 88.0
 offset_right = 416.0
 offset_bottom = 128.0
 texture_normal = ExtResource("1_52t7l")
+script = ExtResource("3_meyqc")
+level = ExtResource("6_hkdsq")
 
 [node name="Level4" type="TextureButton" parent="." unique_id=248353833]
 layout_mode = 0
@@ -41,3 +57,10 @@ offset_top = 164.0
 offset_right = 557.0
 offset_bottom = 204.0
 texture_normal = ExtResource("1_52t7l")
+script = ExtResource("3_meyqc")
+level = ExtResource("7_7knq8")
+
+[connection signal="button_down" from="Level1" to="Level1" method="_on_button_down"]
+[connection signal="button_down" from="Level2" to="Level2" method="_on_button_down"]
+[connection signal="button_down" from="Level3" to="Level3" method="_on_button_down"]
+[connection signal="button_down" from="Level4" to="Level4" method="_on_button_down"]

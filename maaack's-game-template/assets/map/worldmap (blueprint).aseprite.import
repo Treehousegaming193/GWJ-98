@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://boxuj7xqvu503"
+path="res://.godot/imported/worldmap (blueprint).aseprite-55ad318d2d8669c3af5da39b72660495.res"
+
+[deps]
+
+source_file="res://assets/map/worldmap (blueprint).aseprite"
+dest_files=["res://.godot/imported/worldmap (blueprint).aseprite-55ad318d2d8669c3af5da39b72660495.res"]
+
+[params]
+
