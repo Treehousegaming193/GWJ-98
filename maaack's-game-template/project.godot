@@ -193,6 +193,7 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+viewport/hdr_2d=true
 textures/decals/filter=0
 textures/light_projectors/filter=0
 lightmapping/lightmap_gi/use_bicubic_filter=false

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ddfa48bg2xx48"]
+
+[ext_resource type="Script" uid="uid://kn4had4pmq2f" path="res://assets/tilesets/hazard.gd" id="1_ohrbe"]
+[ext_resource type="Texture2D" uid="uid://cvwwyth2nsnhx" path="res://assets/tilesets/Big Scaffolding.png" id="2_6uf5a"]
+[ext_resource type="Texture2D" uid="uid://xlbw057r0yxw" path="res://assets/tilesets/spark-sheet.png" id="3_2adtu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmflf"]
+size = Vector2(50, 50)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gbcqf"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmflf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+angle_min = 1.0728835e-05
+angle_max = 180.00002
+spread = 180.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_2adtu"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2adtu"]
+gradient = SubResource("Gradient_2adtu")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[node name="Hazard" type="Area2D" unique_id=902492273]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_ohrbe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1191465108]
+shape = SubResource("RectangleShape2D_kmflf")
+
+[node name="Visual" type="Sprite2D" parent="." unique_id=444306502]
+texture = ExtResource("2_6uf5a")
+hframes = 5
+frame = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=957558449]
+material = SubResource("CanvasItemMaterial_gbcqf")
+amount = 3
+texture = ExtResource("3_2adtu")
+lifetime = 6.0
+preprocess = 2.0
+visibility_rect = Rect2(-640, -640, 1280, 1280)
+process_material = SubResource("ParticleProcessMaterial_kmflf")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1913943941]
+color = Color(1, 1, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_2adtu")

@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Godot Wild Jam 98 - BGM Level Music Ver 1.1.o
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
