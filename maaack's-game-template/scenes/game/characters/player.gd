@@ -1,5 +1,16 @@
 extends CharacterBody2D
 
+enum Anim { IDLE, JUMP, CHARGE_JUMP, HOLD_CHARGE, FALL, SHOCK, DIZZY }
+
+const ANIM: Array[String] = [
+	"wind right face right", # Anim.IDLE:
+	"jump", # Anim.JUMP:
+	"jumpcharge", # Anim.CHARGE_JUMP:
+	"holdcharge", # Anim.HOLD_CHARGE:
+	"falling", # Anim.FALL:
+	"jolt back", #Anim.SHOCK:
+	"dizzy", # Anim.DIZZY:
+]
 
 @export var jump_speed: float = 100
 @export var speed: float = 150
@@ -13,10 +24,13 @@ var in_debug: bool = false
 
 @onready var flashlight: PointLight2D = %Flashlight
 @onready var jump_strength_indicator: Line2D = %JumpStrengthIndicator
-@onready var scarf_visual: Sprite2D = %ScarfVisual
 @onready var visual: Sprite2D = %Visual
+@onready var scarf_strong_wind_visual: Sprite2D = %ScarfStrongWindVisual
+@onready var scarf_medium_wind_visual: Sprite2D = %ScarfMediumWindVisual
+@onready var scarf_weak_wind_visual: Sprite2D = %ScarfWeakWindVisual
 @onready var wind_indicator: Line2D = %WindIndicator
 @onready var jump_charge_audio: AudioStreamPlayer2D = %JumpChargeAudio
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -51,31 +65,48 @@ func _physics_process(delta: float) -> void:
 			%JumpAudio.play()
 			# rest jump charge
 			jump_charge_secs = 0
+			#if not anim_player.is_playing or \
+			#	not anim_player.current_animation in [ANIM[Anim.CHARGE_JUMP], ANIM[Anim.HOLD_CHARGE]]:
+			print("===== play jump anim")
+			anim_player.play(ANIM[Anim.JUMP])
 		elif want_charge_jump:
 			if not jump_charge_audio.playing:
 				jump_charge_audio.play()
 			jump_charge_secs = min(jump_charge_secs + delta, max_jump_charge_secs)
 			jump_strength_indicator.set_point_position(1, Vector2(0, -32 * jump_charge_secs / max_jump_charge_secs))
+
+			if not anim_player.current_animation in [ANIM[Anim.CHARGE_JUMP], ANIM[Anim.HOLD_CHARGE]]:
+				print("===== play charge jump anim")
+				anim_player.play(ANIM[Anim.CHARGE_JUMP])
+			if anim_player.current_animation == ANIM[Anim.CHARGE_JUMP] and not anim_player.is_playing:
+				print("===== play hold charge anim")
+				anim_player.play(ANIM[Anim.HOLD_CHARGE])
+		else:
+			if anim_player.current_animation != ANIM[Anim.IDLE]:
+				anim_player.play(ANIM[Anim.IDLE])
 	else:
 		jump_charge_audio.stop()
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
 		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
 
+	if velocity.y > 0 and anim_player.current_animation != ANIM[Anim.FALL]:
+		anim_player.play(ANIM[Anim.FALL])
+
 	if input_dir:
 		visual.flip_h = input_dir.x < 0
 	move_and_slide()
 
 	# Procedural scarf
-	%scarf.velocity = Vector2.ZERO
-	%scarf.position = position
-	if Wind.wind_direction_left:
-		velocity.x -= Wind.wind_speed
-		%scarf.velocity.x = velocity.x + Wind.wind_speed
-	if !Wind.wind_direction_left:
-		velocity.x += Wind.wind_speed
-		%scarf.velocity.x = velocity.x - Wind.wind_speed
-	%scarf.move_and_slide()
+	#%scarf.velocity = Vector2.ZERO
+	#%scarf.position = position
+	#if Wind.wind_direction_left:
+		#velocity.x -= Wind.wind_speed
+		#%scarf.velocity.x = velocity.x + Wind.wind_speed
+	#if !Wind.wind_direction_left:
+		#velocity.x += Wind.wind_speed
+		#%scarf.velocity.x = velocity.x - Wind.wind_speed
+	#%scarf.move_and_slide()
 	# Can't really parent physics bodies to each other
 	# (well, you can, it just won't work like you hope, I think)
 	# this is the biggest reason I think character body 2d isn't a good fit.
@@ -84,7 +115,12 @@ func _physics_process(delta: float) -> void:
 	# for now, just an indicator of direction & speed
 	var wsx: float = 2 * -Wind.wind_speed if Wind.wind_direction_left else Wind.wind_speed
 	wind_indicator.set_point_position(1, Vector2(wsx, 0))
-	scarf_visual.flip_h = !Wind.wind_direction_left
+	scarf_strong_wind_visual.visible = Wind.wind_speed > 8
+	scarf_weak_wind_visual.visible = Wind.wind_speed < 5
+	scarf_medium_wind_visual.visible = Wind.wind_speed <= 8 and Wind.wind_speed >= 5
+	scarf_strong_wind_visual.flip_h = Wind.wind_direction_left
+	scarf_medium_wind_visual.flip_h = Wind.wind_direction_left
+	scarf_weak_wind_visual.flip_h = Wind.wind_direction_left
 
 
 func _process(_delta: float) -> void:

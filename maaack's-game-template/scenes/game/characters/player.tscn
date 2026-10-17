@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c68v5v3qiwoxf" path="res://scenes/game/characters/player.gd" id="1_kwsww"]
 [ext_resource type="Material" uid="uid://cl4gilhpikq76" path="res://scenes/game/characters/unshaded_material.tres" id="2_774tr"]
-[ext_resource type="Texture2D" uid="uid://dvxeehtslk0f" path="res://assets/characters/prototype_character.png" id="2_hx28b"]
 [ext_resource type="Texture2D" uid="uid://bby5x7ajmq8f5" path="res://assets/characters/flashlight_256x256.png" id="3_g7505"]
-[ext_resource type="Script" uid="uid://dk118d3prkqd6" path="res://scenes/game/scripts/scarf.gd" id="3_hx28b"]
 [ext_resource type="AudioStream" uid="uid://dm4txyag57din" path="res://assets/audio/Godot Wild Jam 98 - Frobert Jump B.mp3" id="6_dmcgn"]
 [ext_resource type="AudioStream" uid="uid://dxvjgqoceab6r" path="res://assets/audio/Godot Wild Jam 98 - SFX Jump Charge v2.0.ogg" id="7_lho7s"]
 
@@ -12,16 +10,504 @@
 height = 32.0
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_774tr"]
-_data = PackedByteArray("AAADAAUAAAABAAAAYAAAACAAAABGAQAAUklGRj4BAABXRUJQVlA4TDEBAAAvX8AHEFegGrIV6mD0+QZJJLh0EgnJSAAkVF5wgxn4wYUesjlDA5FkbJFHNkGUU2z+A7AvxR3F1xri+AzdNQ1zAMe1bVfNFZkR0H4dQo1MGMHF0u+hT/aR25yqbL/a+Y6Xh8MZQUT/J8D+dPncsuxtMk0+p8ySKUkUZGrlLo8lwMvjo5RSOrq4vGlKXHZuXrbSSUftqnOscpxLgCkWIJ9zDZMESIqtSabRgxDI6YjTDUUKgKMNyamKAXvMjnS6yFClAICthqkWyJturqLivvAeAFNdui+ydRXuz7WW5I5ZRYP0HX1ILPnpPt+aOSoaEe6+WLg7INGI99KzbUNFwV7L2IqybQUEzF6jLMv3iJDBa8R7RARMczBoRHaEihWV/1uSDYsIsyFggITt7AJiw9GfAAA=")
-size_override = Vector2(96, 32)
+_data = PackedByteArray("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")
+size_override = Vector2(576, 480)
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_dmcgn"]
-_data = PackedByteArray("AAADAAUAAAABAAAAYAAAACAAAACSAAAAUklGRooAAABXRUJQVlA4TH0AAAAvX8AHEBcgFkymmP+RlkAgyV9qmEVi/gP9wG0kyaqzH0QXhewfz39gyv5RXBAik2nTFNyJZUb0fwLwwUPo+bQhBBcNIYS9x2RGMohDPpPkrLS1JMhuZJtSoOTctmwAKLvStBIAUIpJywucKCZcP7Ex3KkUjF2gpPiALJ3+rAA=")
-size_override = Vector2(96, 32)
+_data = PackedByteArray("AAADAAUAAAABAAAA4AEAAOABAAC4AwAAUklGRrADAABXRUJQVlA4TKQDAAAv38F3EB8gFkymmP+RlkAgyV9qmEVi/gONB7RkbXvbNp+FSWM0gzRpEa4LSMEWXPilLUGryCLE+zS3FxfIAjJDLCW9II2XHgyGz8X/y/gB/UhPGNH/CbCD///9VDrz+ElO1h5/LE0RnuXosaJTSe/PRu6+9nCi+7owHU1MOh3hfl/xakzo/sztTTnFa7qwZ8Sx4u+7AxdUYySpA0iyMjtXNcVwAYwZAGpJcjODWlJfjJA64sUIqBXtyinaRlIHNroNgFqycAAqGwWFpSQM+mIKG4DKkrdwQVJRWmqg6QG7zDsm2GNTAnbJ2abDMk+6g///jbGFNDuu5m6gStNS5w7KNEZzlLeWbZFo2K7StFDn4jdLvONqGjOaoyzseD3dtVTDdpWFgVWqlibVjqVquZaHbTJje5TIsjdMcCsLu0vRZI7MtSRraSxrNsW13F1LtWOVquVW7o5SfUGZh6FOtk22o8hEk85SP8HyuGuO5ka1WOXvve3vpxczMfzhoikSDdujZLeyYXMbske6bR5afprdLhuWzJJZLqpkb1j6zzNRJjue4LNMFMmKCTK5XLZc6fN3nOwf1MeL4OGJu+tplvHtZ267K1yYQadmH2bG/b7i1RS7WtEOMiJJHcAkbRMQ5kPqiBdTGND0gGVUgsLmCFheRWnLvMcWGjv4/+D//978UHrb41cWJ3x7saTF2XGBzhaHJtYXy2JmO7ZBZQvcAhQzkc48fpKDWSt6ljG5+9rDNNL7+Qrdn7m9KUfQxKTTmcjd1x7OamV2rmoMXFCNcL+veDUmdH/m9qacCdSKduUIM4NaUl+MkaQOIMnK7FzVbICgL8aZDUBlI6WOeDECakW7ciZmQNMDNlMJCktJGPTFbMwMsNmK0lIDTQ9YpvfYlIBlGzv4/+D/f8/+4Mz9xMOTTK19o/h+jCSduV9Zf1tk6rEkEabQkdn9rszTI4l4OaIFxftiHnL3tYfz2VNayhZgG+zt6de+UXw/JnR/5vamnMu+stQtUO+hGvNYkghTrMzOVc3kCUUyM2uhsrGPJOLlCKgV7cqZDIXN/JH2lJaSMOiLmcz/0b6y1EDTA5bpJxTJzAyw0e73Fa8u2VDYzF2SOoDLNn+pI14sDhS2xKK0Zd5jC40d/H/w//9Xdfe1h6Pcfe1htiTJ/Znbm3KMJLk/c3tDzlZm56pSrMzOVeWKWtGuHEOtaFdmCwj6YhQQ9EWuDGh6wEYDTQ9YzgFLC9jB//9gBA==")
+size_override = Vector2(480, 480)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_14w1c"]
+_data = PackedByteArray("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")
+size_override = Vector2(576, 480)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_lho7s"]
+_data = PackedByteArray("AAADAAUAAAABAAAA4AEAAOABAABoBQAAUklGRmAFAABXRUJQVlA4TFQFAAAv38F3EB8gFkymmP+RlkAgyV9qmEVCQFDk/2iB/hAsOdveRpL0idkqVHDTVtlm5Y10iE4egQv+QiFW4yehU+gIZZLjVlokAek/WhwhFsExQsUXGrY3EdH/CcDV/79g7gzrwbB8KUKitWA/lmKxIHtD211klor0TM7zFuwEtjMXGbUhTfv6rGRYbkd7DxceKg6m5qwO7GBou0tNtyTs6zO8YbkEtjOXQsea+ur1IthiCdXKc1z8dxUJs7xeYvmE893a55cbaxb29eu4luTEEvyK222gr1iTVK8RLMWJRBDDSjSXgzYs9CLVmotgOhHpKDUA9wW22FesWUSqFZ8YTkSSYewbAN5uYl+zxr2IVBWA0DFEolowBwGQzCbmBoBjYNJepAEkGk4L7iQ1fItNjr0AgQLci/QisoAZoiGNvYjYbWAQkUga+2YQiYbTgq0qCzY69iILCffNpNqB+tzQADVbwaxqWeMTXC8/qnImbUo3a8cZtS+dquVA91XZRh0MaR5qzqjal+JfIE/acADdV0WY9EveLWse6iLMWrNG3bMm/bYa9bYMAw06VCQUb77AR0WY/i/2hdPCjUobdY+i4RK3pbtlTVqzRv2odBXrudoyzD1toE1qCrHngf2oKOO0r7am3beW/a43fHd6Uoj5e5fuDWkeKtpHxcDW5uIpbyjDqH/b3FQM0EBDKTra1+DfF8LSnl7gd4UwNHOBQn574duLX76ntJ9RP/3W+l4bqm+rqS7XWyGZSyBUxfqzxWXHJ8XqcOlnpfLmYlO1VpUm4vK3a3Vp0gbuq5WmMK7dwNhX/yOFCXYDeFYDcIVxEVucbgH4WBafNjEOFRBSOSoAodsEpgZO2nI0gESzjbEXEVuOXkQWbHSWRU05BpFotgI1KOik2uHq/6v/f64Yapavi1Gz4sAJIl0pXEtyeqSEpMe7Ujz/hhQ1M/yip1yMR5LXIyWo5nIsd5wHPd0xoh7K4Q4ct2hmuKTHnN/cmmc9kLwe8psEv+iJ5nYt670dKx3fZLikx3xDCKqZFhLYO5D9cmI4WfREedADzSWwnSFJ1MzwopoziEmPNLGEauU5uEHSId8QQtJDvuOcWD7hfLf2OceJ6IkiqkdWJjmxBL/idpwgesiUqHrKb27HiUQQw0o0HFn0SHGqh0xx6UBxItJRagDuC1B9Us054/wH1VPONwS/UJyIJMPYNwC8pXhRPXGSHnPOIAZduTlDJKoFcxAAyTC8JD1kilc9cVzUI6cFd5IavgVTRPWYc747y0XVnPMdwS96YoRoSGMvIpYSkh4zxS96ICXVTGnBVpUF1OeqmaR6zDm/eZ5f9Eh5bmiAGs6kh5U3z4LqKed8c15YNOec38TV/1f//3K/1CQvpfDyMckvSopqSU5aVtiRolrSZCfDUXSkoIa1GJJOhvQFyN6A7BLYzoLrDch+x4pgiyVUK88NKYJmWYnlE853a48gJ9qDIbmW5MQS/IprSa5luQRysBQnEkEMK9GSgmWFHclFMJ2IdJQagPsCXBfBFkvyieFEJBnGvgHgLcknxlsAXDKECkDoGCJRLZiDAEiGUAEIHcNX8NKC2AASDacFd5IavgWxASQaxu9EJFpGLyILmCEa0tiLiGX0IrKAOfUiLZiDSDScFmxVWcAcRKKhQFUNZVLtQH1uaIAayqTa4er/q/9/JVUSy39ROL9Y1qMtXDRgtyh7aHH+GyvOls1FQ6hXnpuySYvz3VpCyUXEEPxK6EomIgsYzf9EFFxEomXcCwDXFiyIaAfmLBXwYIuWwB37Bi6h4F4sCXsRaYuWwJ61T6ZkztKA2eKadQ==")
+size_override = Vector2(480, 480)
 
 [sub_resource type="Curve" id="Curve_hx28b"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.8938984, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_14w1c"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [19, 20, 21, 19, 20, 21]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 19, 20, 11, 19, 20]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 16, 17]
+}
+
+[sub_resource type="Animation" id="Animation_xp3x1"]
+length = 0.30000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_8wi8w"]
+length = 0.30000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [11, 12, 13]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_vdvct"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26, 27]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 20, 21]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 17, 18, 11, 19, 21]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 19, 20, 21]
+}
+
+[sub_resource type="Animation" id="Animation_pe107"]
+length = 0.30000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [15, 16, 17]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [14, 15, 16]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_kjq5x"]
+length = 0.30000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 9, 10]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_sagjc"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 18, 2, 18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 17, 18, 17]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_8iqvn"]
+length = 0.30000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_rg683"]
+length = 0.30000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScarfMediumWindVisual:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScarfStrongWindVisual:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScarfWeakWindVisual:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_14w1c"]
+_data = {
+&"dizzy": SubResource("Animation_14w1c"),
+&"falling": SubResource("Animation_xp3x1"),
+&"holdcharge": SubResource("Animation_8wi8w"),
+&"jolt back": SubResource("Animation_vdvct"),
+&"jump": SubResource("Animation_pe107"),
+&"jumpcharge": SubResource("Animation_kjq5x"),
+&"walk": SubResource("Animation_sagjc"),
+&"wind left face right": SubResource("Animation_8iqvn"),
+&"wind right face right": SubResource("Animation_rg683")
+}
 
 [node name="Player" type="CharacterBody2D" unique_id=1904716568 groups=["player"]]
 script = ExtResource("1_kwsww")
@@ -30,15 +516,17 @@ script = ExtResource("1_kwsww")
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_lho7s")
 
-[node name="Visual" type="Sprite2D" parent="." unique_id=1091213167]
+[node name="Visual" type="Sprite2D" parent="." unique_id=845197170]
 unique_name_in_owner = true
-light_mask = 2
-visibility_layer = 2
 texture_filter = 1
 material = ExtResource("2_774tr")
 texture = SubResource("PortableCompressedTexture2D_774tr")
 offset = Vector2(0, -16)
+hframes = 6
+vframes = 5
+frame = 6
 metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
 "layer_section": true,
 "output_section": true,
 "pending_changes": {}
@@ -48,27 +536,30 @@ metadata/_aseprite_wizard_config_ = {
 "convert_ms_field": 16.0,
 "convert_to_fps": false,
 "embed_tex": true,
-"i_mode": 1,
+"i_mode": 0,
 "keep_anim_length": false,
 "layers": [],
-"o_ex_p": "[Ss]carf",
+"o_ex_p": "[Ss]carf w",
 "o_folder": "",
 "o_name": "",
 "only_visible": false,
-"player": "",
+"player": "AnimationPlayer",
 "scale": "1.0",
 "slice": "",
 "source": "res://assets/characters/frobert.aseprite",
 "source_uid": 8191322159226206083
 }
-metadata/_aseprite_wizard_source_file_hash_ = "382e35ba0657775949a8c1848bd56431"
+metadata/_aseprite_wizard_source_file_hash_ = "f0b4733d1e1a29380f00b5d2fb5559f5"
 
-[node name="ScarfVisual" type="Sprite2D" parent="." unique_id=157296318]
+[node name="ScarfStrongWindVisual" type="Sprite2D" parent="." unique_id=157296318]
 unique_name_in_owner = true
+visible = false
 texture_filter = 1
 material = ExtResource("2_774tr")
 texture = SubResource("PortableCompressedTexture2D_dmcgn")
 offset = Vector2(0, -16)
+hframes = 5
+vframes = 5
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": true,
 "pending_changes": {},
@@ -79,20 +570,88 @@ metadata/_aseprite_wizard_config_ = {
 "convert_ms_field": 16.0,
 "convert_to_fps": false,
 "embed_tex": true,
-"i_mode": 1,
+"i_mode": 0,
 "keep_anim_length": false,
-"layers": ["scarf", "Scarf beyond sprite"],
+"layers": ["scarf w/ strong wind"],
 "o_ex_p": "",
 "o_folder": "",
 "o_name": "",
 "only_visible": false,
-"player": "",
+"player": "AnimationPlayer",
 "scale": "1.0",
 "slice": "",
 "source": "res://assets/characters/frobert.aseprite",
 "source_uid": 8191322159226206083
 }
-metadata/_aseprite_wizard_source_file_hash_ = "382e35ba0657775949a8c1848bd56431"
+metadata/_aseprite_wizard_source_file_hash_ = "0f465b5bcc5bc65fc039d099dc0a0566"
+
+[node name="ScarfMediumWindVisual" type="Sprite2D" parent="." unique_id=1800174884]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+material = ExtResource("2_774tr")
+texture = SubResource("PortableCompressedTexture2D_14w1c")
+offset = Vector2(0, -16)
+hframes = 6
+vframes = 5
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": ["scarf w/ medium wind"],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/characters/frobert.aseprite",
+"source_uid": 8191322159226206083
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f0b4733d1e1a29380f00b5d2fb5559f5"
+
+[node name="ScarfWeakWindVisual" type="Sprite2D" parent="." unique_id=1635550000]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+material = ExtResource("2_774tr")
+texture = SubResource("PortableCompressedTexture2D_lho7s")
+offset = Vector2(0, -16)
+hframes = 5
+vframes = 5
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {},
+"slice_section": false
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": ["scarf w/ weak wind"],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/characters/frobert.aseprite",
+"source_uid": 8191322159226206083
+}
+metadata/_aseprite_wizard_source_file_hash_ = "0f465b5bcc5bc65fc039d099dc0a0566"
 
 [node name="Flashlight" type="PointLight2D" parent="." unique_id=1854439567]
 unique_name_in_owner = true
@@ -124,26 +683,6 @@ width = 8.0
 width_curve = SubResource("Curve_hx28b")
 default_color = Color(0.85882354, 0.25490198, 0.38039216, 1)
 
-[node name="scarf" type="CharacterBody2D" parent="." unique_id=1015554850]
-unique_name_in_owner = true
-visible = false
-motion_mode = 1
-script = ExtResource("3_hx28b")
-
-[node name="Sprite2D" type="Sprite2D" parent="scarf" unique_id=317321352]
-position = Vector2(33, 0)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_hx28b")
-
-[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." unique_id=993443698]
-visible = false
-rotation = -1.5707964
-node_a = NodePath("..")
-node_b = NodePath("../scarf")
-length = 10.0
-rest_length = 10.0
-stiffness = 64.0
-
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="." unique_id=1292038064]
 unique_name_in_owner = true
 stream = ExtResource("6_dmcgn")
@@ -153,3 +692,6 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("7_lho7s")
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=424353237]
+libraries/ = SubResource("AnimationLibrary_14w1c")

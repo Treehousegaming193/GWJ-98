@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8bj60quaabo6" path="res://scenes/game/enemies/bird.gd" id="1_q4v3t"]
 
-[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_wxqxd"]
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_q4v3t"]
 _data = PackedByteArray("AAADAAUAAAABAAAAQAAAAEAAAAA8AgAAUklGRjQCAABXRUJQVlA4TCgCAAAvP8APEF9gFgCazhASSSTFIMIZyjTUNJICnZXz7wFkYOAtKa9DQds2TANqJIf4b/MfgPz/JM6l9yYo3hZUk5nAmQFyJIBtIweXNrT3gh1c5RxU2TVPs6WTxm3SYbjOeVvHNX35rmPnHLb2RP6OBAVw/IGI/jtw2zaSFBeapO2ev4DuugaKkuiVQlTIc6IyXbPUUtGakTFFsnGZEllrDMv/4vmsNjw9rcemJUpR6jkZQ7drvZ7bmWl/3eYjJWNDwdZsRDqit4gopVWRHMKWczE9He2v4N85Z4lqFRt1G459OoiOtNSTadZp6/zq3NmEZvtCs/5r9n2+6ShDVNM0t4kdouy/E321IZoRZbhxS4KfNs0GZVW/ds4Z6nU71tTZzC4yNj1hTWO95Xe2Es603XeeTqfwftNZY8xPzrjtdS+INT90FAmOK4PtAuOoJ6JfwUntgynwen/0cBITnCSAnDl67ylsccak4dD7ya+Q0YrsczpamdNz5NrK6In8QBbKW5kjEewUiSBKsj2JNSxVlWuiVZXL/8oitinCO1ixrbjSiD+CWp4C+/8HYjrk6VcICu1zeZb4ECXhqyo1PAAgy8dUGcBLlD9XVYwjGbKGAExDUAdgxHotI1yMKgGRv8ewwPxlULUXz6aVhLioOY+LI8zfRgMCdH1aVDSnl0ZYBrvBGoy98iQ/h4jpzRRNxe4tjtJ1BH0tVVFF8Bu4WAI7UaJqKbEGpXU6AwA=")
 size_override = Vector2(64, 64)
 
@@ -18,13 +18,34 @@ size = Vector2(16, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru5f0"]
 size = Vector2(37, 49)
 
+[sub_resource type="Animation" id="Animation_wxqxd"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hbcan"]
+_data = {
+&"default": SubResource("Animation_wxqxd")
+}
+
 [node name="Bird" type="CharacterBody2D" unique_id=546600612]
 collision_layer = 0
 script = ExtResource("1_q4v3t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1703490508]
 texture_filter = 1
-texture = SubResource("PortableCompressedTexture2D_wxqxd")
+texture = SubResource("PortableCompressedTexture2D_q4v3t")
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": true,
 "pending_changes": {}
@@ -34,14 +55,14 @@ metadata/_aseprite_wizard_config_ = {
 "convert_ms_field": 16.0,
 "convert_to_fps": false,
 "embed_tex": true,
-"i_mode": 1,
+"i_mode": 0,
 "keep_anim_length": false,
 "layers": [],
 "o_ex_p": "",
 "o_folder": "",
 "o_name": "",
 "only_visible": true,
-"player": "",
+"player": "AnimationPlayer",
 "scale": "1.0",
 "slice": "",
 "source": "res://assets/enemies/kingfisher.aseprite",
@@ -84,6 +105,9 @@ collide_with_areas = true
 
 [node name="LightTimer" type="Timer" parent="." unique_id=1072064294]
 wait_time = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1512711659]
+libraries/ = SubResource("AnimationLibrary_hbcan")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
