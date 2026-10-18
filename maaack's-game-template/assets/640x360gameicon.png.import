@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b43lib8ocv2qr"
-path="res://.godot/imported/worldmap (blueprint).png-623f5fac44412ee6b7a64067ddacacd8.ctex"
+uid="uid://bvwqbovxknss8"
+path="res://.godot/imported/640x360gameicon.png-efdb4638ae1e993f5b45d7301a99ca68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/worldmap (blueprint).png"
-dest_files=["res://.godot/imported/worldmap (blueprint).png-623f5fac44412ee6b7a64067ddacacd8.ctex"]
+source_file="res://assets/640x360gameicon.png"
+dest_files=["res://.godot/imported/640x360gameicon.png-efdb4638ae1e993f5b45d7301a99ca68.ctex"]
 
 [params]
 

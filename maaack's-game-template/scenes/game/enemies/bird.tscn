@@ -152,7 +152,9 @@ vframes = 5
 frame = 13
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": true,
-"pending_changes": {}
+"pending_changes": {
+"source_uid": 905451133264852971
+}
 }
 metadata/_aseprite_wizard_config_ = {
 "convert_fps_field": 60.0,

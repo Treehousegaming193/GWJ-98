@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb0rnserpwns"
-path="res://.godot/imported/first tower button.png-56335b4d1452c09210b9b984208336d9.ctex"
+uid="uid://bbx7857ddu26o"
+path="res://.godot/imported/3rdtower.png-bf2fea5d755d2b614080a12cb5af6566.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/first tower button.png"
-dest_files=["res://.godot/imported/first tower button.png-56335b4d1452c09210b9b984208336d9.ctex"]
+source_file="res://assets/map/3rdtower.png"
+dest_files=["res://.godot/imported/3rdtower.png-bf2fea5d755d2b614080a12cb5af6566.ctex"]
 
 [params]
 
