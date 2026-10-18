@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://4w5gjco3ybas"]
+[gd_scene format=4 uid="uid://jm37v1p4fe7a"]
 
 [ext_resource type="Script" uid="uid://dno7wkps5r88" path="res://scenes/game/levels/prototype.gd" id="1_gud56"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_6212h"]
