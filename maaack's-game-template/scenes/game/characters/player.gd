@@ -31,6 +31,7 @@ var in_debug: bool = false
 @onready var wind_indicator: Line2D = %WindIndicator
 @onready var jump_charge_audio: AudioStreamPlayer2D = %JumpChargeAudio
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var scarf_player: AnimationPlayer = $ScarfAnimationPlayer
 
 
 func _ready() -> void:
@@ -59,6 +60,8 @@ func _physics_process(delta: float) -> void:
 			#	not anim_player.current_animation in [ANIM[Anim.CHARGE_JUMP], ANIM[Anim.HOLD_CHARGE]]:
 			print("===== play jump anim")
 			anim_player.play(ANIM[Anim.JUMP])
+			#scarf_player.play(ANIM[Anim.JUMP])
+			# It seems playing an animation with the scarf is reseting it's flip_h. so do this every time
 		elif want_charge_jump:
 			if not jump_charge_audio.playing:
 				jump_charge_audio.play()
@@ -68,12 +71,15 @@ func _physics_process(delta: float) -> void:
 			if not anim_player.current_animation in [ANIM[Anim.CHARGE_JUMP], ANIM[Anim.HOLD_CHARGE]]:
 				print("===== play charge jump anim")
 				anim_player.play(ANIM[Anim.CHARGE_JUMP])
+				#scarf_player.play(ANIM[Anim.CHARGE_JUMP])
 			if anim_player.current_animation == ANIM[Anim.CHARGE_JUMP] and not anim_player.is_playing:
 				print("===== play hold charge anim")
 				anim_player.play(ANIM[Anim.HOLD_CHARGE])
+				#scarf_player.play(ANIM[Anim.HOLD_CHARGE])
 		else:
 			if anim_player.current_animation != ANIM[Anim.IDLE]:
 				anim_player.play(ANIM[Anim.IDLE])
+				scarf_player.play(ANIM[Anim.IDLE])
 	else:
 		jump_charge_audio.stop()
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
@@ -86,33 +92,16 @@ func _physics_process(delta: float) -> void:
 			velocity.x += Wind.wind_speed
 		if velocity.y > 0 and anim_player.current_animation != ANIM[Anim.FALL]:
 			anim_player.play(ANIM[Anim.FALL])
-
+			scarf_player.play(ANIM[Anim.FALL])
 	if input_dir:
 		visual.flip_h = input_dir < 0
 	move_and_slide()
 
-	# Procedural scarf
-	#%scarf.velocity = Vector2.ZERO
-	#%scarf.position = position
-		#%scarf.velocity.x = velocity.x + Wind.wind_speed
-	#if !Wind.wind_direction_left:
-
-		#%scarf.velocity.x = velocity.x - Wind.wind_speed
-	#%scarf.move_and_slide()
-	# Can't really parent physics bodies to each other
-	# (well, you can, it just won't work like you hope, I think)
-	# this is the biggest reason I think character body 2d isn't a good fit.
-	# I would try a line2d and a shader like https://godotshaders.com/shader/2d-simple-animated-flag-shader/
-
-	# for now, just an indicator of direction & speed
 	var wsx: float = 2 * -Wind.wind_speed if Wind.wind_direction_left else Wind.wind_speed
 	wind_indicator.set_point_position(1, Vector2(wsx, 0))
-	scarf_strong_wind_visual.visible = Wind.wind_speed > 8
-	scarf_weak_wind_visual.visible = Wind.wind_speed < 5
-	scarf_medium_wind_visual.visible = Wind.wind_speed <= 8 and Wind.wind_speed >= 5
-	scarf_strong_wind_visual.flip_h = Wind.wind_direction_left
-	scarf_medium_wind_visual.flip_h = Wind.wind_direction_left
-	scarf_weak_wind_visual.flip_h = Wind.wind_direction_left
+	scarf_strong_wind_visual.visible = Wind.wind_speed > 16
+	scarf_weak_wind_visual.visible = Wind.wind_speed < 8
+	scarf_medium_wind_visual.visible = Wind.wind_speed <= 16 and Wind.wind_speed >= 8
 
 
 func _process(_delta: float) -> void:
@@ -120,6 +109,9 @@ func _process(_delta: float) -> void:
 		#wind_direction_left = !wind_direction_left
 	if flashlight.visible:
 		flashlight.rotation = global_position.angle_to_point(get_global_mouse_position())
+	scarf_strong_wind_visual.flip_h = Wind.wind_direction_left
+	scarf_medium_wind_visual.flip_h = Wind.wind_direction_left
+	scarf_weak_wind_visual.flip_h = Wind.wind_direction_left
 
 
 func _unhandled_input(event: InputEvent) -> void:

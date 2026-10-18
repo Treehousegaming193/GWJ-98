@@ -1,14 +1,415 @@
 [gd_scene format=4 uid="uid://bk8pdw6g6jdt1"]
 
-[ext_resource type="PackedScene" uid="uid://cmw0jwa2528eb" path="res://scenes/game/levels/tower_top/tower_top.tscn" id="1_x6gbb"]
+[ext_resource type="Script" uid="uid://dtnqklybiu0cj" path="res://scenes/game/levels/tower_top/tower_top.gd" id="1_d812b"]
+[ext_resource type="Texture2D" uid="uid://bgaitfg80gisk" path="res://assets/environment/Tower5.png" id="2_exvsi"]
 [ext_resource type="TileSet" uid="uid://cxhu3vtfdk8bq" path="res://assets/tilesets/tiles_64x64.tres" id="2_i0mpm"]
 [ext_resource type="TileSet" uid="uid://d4dryl8h1ocse" path="res://assets/tilesets/tiles_32x32.tres" id="3_3pi0p"]
+[ext_resource type="AudioStream" uid="uid://j88lq53dmvu7" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Broken.mp3" id="3_yjycd"]
 [ext_resource type="TileSet" uid="uid://mvwjgevdsysy" path="res://assets/tilesets/blockout_tiles_v2_nes_32x32.tres" id="4_4dj76"]
+[ext_resource type="AudioStream" uid="uid://mh456ox4l7tp" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Fixed.mp3" id="4_ofm8v"]
+[ext_resource type="AudioStream" uid="uid://drfnem43xcq37" path="res://assets/audio/signal/Godot Wild Jam 98 - SFX Signal Fix Interaction.mp3" id="5_c6xoh"]
+[ext_resource type="Material" uid="uid://cl4gilhpikq76" path="res://scenes/game/characters/unshaded_material.tres" id="6_mycet"]
+[ext_resource type="Texture2D" uid="uid://cb0jocx6q3ise" path="res://addons/input_prompts/icons/default/xbox/xbox_button_color_y.png" id="7_qq5lf"]
+[ext_resource type="Script" uid="uid://xiugbyaytdrk" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="8_ixvt0"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_w0tj0"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_100nq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmflf"]
+radius = 39.0
+height = 260.0
+
+[sub_resource type="Animation" id="Animation_rck6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SignalBrokenSFX:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SignalFixedSFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SignalBrokenSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ProgressBar:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ProgressBar:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:repaired")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PhantomCamera2D:priority")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PhantomCamera2D:zoom")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PhantomCamera2D:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ukrp1"]
+resource_name = "repair"
+length = 6.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SignalInteractionSFX")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_c6xoh")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SignalBrokenSFX:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -60.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SignalFixedSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SignalBrokenSFX:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ProgressBar:value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ProgressBar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:repaired")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PhantomCamera2D:priority")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PhantomCamera2D:zoom")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(3, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.25, 0.25)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PhantomCamera2D:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(3, 6),
+"transitions": PackedFloat32Array(1, 16),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 400)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xn0ol"]
+_data = {
+&"RESET": SubResource("Animation_rck6e"),
+&"repair": SubResource("Animation_ukrp1")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_8m64o"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_wunjg"]
+device = -1
+button_index = 3
+
+[sub_resource type="Resource" id="Resource_sge5x"]
+script = ExtResource("10_100nq")
 
 [node name="Level" type="Parallax2D" unique_id=1418886595]
 
-[node name="TowerTop" parent="." unique_id=1510611229 instance=ExtResource("1_x6gbb")]
+[node name="TowerTop" type="Area2D" parent="." unique_id=1510611229]
 position = Vector2(319, -1066)
+script = ExtResource("1_d812b")
+
+[node name="Visual" type="Sprite2D" parent="TowerTop" unique_id=473310464]
+texture_filter = 1
+texture = ExtResource("2_exvsi")
+offset = Vector2(0, 5)
+hframes = 5
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/signaltower1.aseprite",
+"source_uid": 1305036726067460788
+}
+metadata/_aseprite_wizard_source_file_hash_ = "1032e73f59a8cde82a779666c21bc532"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerTop" unique_id=2006175399]
+position = Vector2(0, 31)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kmflf")
+
+[node name="SignalBrokenSFX" type="AudioStreamPlayer2D" parent="TowerTop" unique_id=684383131]
+unique_name_in_owner = true
+stream = ExtResource("3_yjycd")
+volume_db = -3.0
+autoplay = true
+max_distance = 800.0
+bus = &"SFX"
+
+[node name="SignalInteractionSFX" type="AudioStreamPlayer2D" parent="TowerTop" unique_id=1393316882]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="SignalFixedSFX" type="AudioStreamPlayer2D" parent="TowerTop" unique_id=1454646142]
+unique_name_in_owner = true
+stream = ExtResource("4_ofm8v")
+volume_db = 3.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TowerTop" unique_id=1843364928]
+libraries/ = SubResource("AnimationLibrary_xn0ol")
+
+[node name="ProgressBar" type="ProgressBar" parent="TowerTop" unique_id=1262269628]
+visible = false
+material = ExtResource("6_mycet")
+custom_minimum_size = Vector2(100, 10)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -27.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActionPromptContainer" type="Control" parent="TowerTop" unique_id=561413052]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActionPromptShadow" type="TextureRect" parent="TowerTop/ActionPromptContainer" unique_id=616088822]
+modulate = Color(0, 0, 0, 1)
+light_mask = 2
+visibility_layer = 2
+material = ExtResource("6_mycet")
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(1, 2)
+texture = ExtResource("7_qq5lf")
+stretch_mode = 5
+script = ExtResource("8_ixvt0")
+action = "interact"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_8m64o"), SubResource("InputEventJoypadButton_wunjg")])
+metadata/_custom_type_script = "uid://xiugbyaytdrk"
+
+[node name="ActionPrompt" type="TextureRect" parent="TowerTop/ActionPromptContainer" unique_id=393072805]
+light_mask = 2
+visibility_layer = 2
+material = ExtResource("6_mycet")
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_qq5lf")
+stretch_mode = 5
+script = ExtResource("8_ixvt0")
+action = "interact"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_8m64o"), SubResource("InputEventJoypadButton_wunjg")])
+metadata/_custom_type_script = "uid://xiugbyaytdrk"
+
+[node name="PhantomCamera2D" type="Node2D" parent="TowerTop" unique_id=245509972]
+script = ExtResource("9_w0tj0")
+tween_resource = SubResource("Resource_sge5x")
+draw_limits = true
+metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="BigScaffoldingWithHazards" type="TileMapLayer" parent="." unique_id=1137716605]
 tile_set = ExtResource("2_i0mpm")
