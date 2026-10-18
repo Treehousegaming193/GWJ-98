@@ -262,12 +262,12 @@ _data = {
 &"repair": SubResource("Animation_ukrp1")
 }
 
-[sub_resource type="InputEventKey" id="InputEventKey_6nhxb"]
+[sub_resource type="InputEventKey" id="InputEventKey_8uijv"]
 device = -1
 physical_keycode = 69
 unicode = 101
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_axadd"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nbtv0"]
 device = -1
 button_index = 3
 
@@ -378,7 +378,7 @@ stretch_mode = 5
 script = ExtResource("7_axadd")
 action = "interact"
 icon = 0
-events = Array[InputEvent]([SubResource("InputEventKey_6nhxb"), SubResource("InputEventJoypadButton_axadd")])
+events = Array[InputEvent]([SubResource("InputEventKey_8uijv"), SubResource("InputEventJoypadButton_nbtv0")])
 metadata/_custom_type_script = "uid://xiugbyaytdrk"
 
 [node name="ActionPrompt" type="TextureRect" parent="ActionPromptContainer" unique_id=393072805]
@@ -397,7 +397,7 @@ stretch_mode = 5
 script = ExtResource("7_axadd")
 action = "interact"
 icon = 0
-events = Array[InputEvent]([SubResource("InputEventKey_6nhxb"), SubResource("InputEventJoypadButton_axadd")])
+events = Array[InputEvent]([SubResource("InputEventKey_8uijv"), SubResource("InputEventJoypadButton_nbtv0")])
 metadata/_custom_type_script = "uid://xiugbyaytdrk"
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=245509972]

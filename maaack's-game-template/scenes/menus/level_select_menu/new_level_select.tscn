@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://drqrwghj0hhtu"]
 
-[ext_resource type="Texture2D" uid="uid://dvxeehtslk0f" path="res://assets/characters/prototype_character.png" id="1_52t7l"]
 [ext_resource type="Texture2D" uid="uid://canlvx0ftc57m" path="res://assets/map/worldmap (blueprint).png" id="1_sjokj"]
-[ext_resource type="Texture2D" uid="uid://b2htmbei04qcb" path="res://assets/worldmap-tower1-button.png" id="2_meyqc"]
+[ext_resource type="Texture2D" uid="uid://4rvb5p5lggo4" path="res://assets/1sttower.png" id="2_550iq"]
 [ext_resource type="Script" uid="uid://b6yqngbto7ifw" path="res://scenes/menus/level_select_menu/level_button.gd" id="3_meyqc"]
 [ext_resource type="PackedScene" uid="uid://d3ku87ac3ye83" path="res://scenes/game/levels/prototype.tscn" id="4_sjokj"]
 [ext_resource type="PackedScene" uid="uid://dbnh4fiy7xt7g" path="res://scenes/game/levels/2prototype.tscn" id="5_550iq"]
-[ext_resource type="Texture2D" uid="uid://bt1bookmbefv4" path="res://assets/worldmap-tower2-button.png" id="5_lirng"]
+[ext_resource type="Texture2D" uid="uid://dcx151rapeb2h" path="res://assets/2ndtower.png" id="5_hkdsq"]
 [ext_resource type="PackedScene" uid="uid://bnj4x47fo3v7p" path="res://scenes/game/levels/3prototype.tscn" id="6_hkdsq"]
+[ext_resource type="Texture2D" uid="uid://bbx7857ddu26o" path="res://assets/3rdtower.png" id="7_6fjuv"]
 [ext_resource type="PackedScene" uid="uid://w2nxstqcsg74" path="res://scenes/game/levels/4prototype.tscn" id="7_7knq8"]
+[ext_resource type="Texture2D" uid="uid://tp5smoxff7r0" path="res://assets/4thtower.png" id="9_imhhh"]
+[ext_resource type="Script" uid="uid://dxs24q2ngf3o2" path="res://scenes/menus/level_select_menu/button.gd" id="11_7knq8"]
+[ext_resource type="PackedScene" uid="uid://cpgfbwgkoiv1c" path="res://scenes/game/levels/5prototype.tscn" id="12_6fjuv"]
 
 [node name="Control" type="Control" unique_id=541711488]
 layout_mode = 3
@@ -24,45 +27,69 @@ texture = ExtResource("1_sjokj")
 
 [node name="Level1" type="TextureButton" parent="." unique_id=687347615]
 layout_mode = 0
-offset_left = 73.0
-offset_top = 84.0
-offset_right = 175.0
-offset_bottom = 231.0
-texture_normal = ExtResource("2_meyqc")
+offset_left = 71.0
+offset_top = 81.0
+offset_right = 173.0
+offset_bottom = 228.0
+texture_normal = ExtResource("2_550iq")
 script = ExtResource("3_meyqc")
 level = ExtResource("4_sjokj")
+level_number = 1
 
 [node name="Level2" type="TextureButton" parent="." unique_id=1586266474]
+visible = false
 layout_mode = 0
 offset_left = 205.0
 offset_top = 137.0
 offset_right = 311.0
 offset_bottom = 288.0
-texture_normal = ExtResource("5_lirng")
+disabled = true
+texture_normal = ExtResource("5_hkdsq")
 script = ExtResource("3_meyqc")
 level = ExtResource("5_550iq")
+level_number = 2
 
 [node name="Level3" type="TextureButton" parent="." unique_id=1424955469]
+visible = false
 layout_mode = 0
-offset_left = 376.0
-offset_top = 88.0
-offset_right = 416.0
-offset_bottom = 128.0
-texture_normal = ExtResource("1_52t7l")
+offset_left = 323.0
+offset_top = 61.0
+offset_right = 426.0
+offset_bottom = 218.0
+disabled = true
+texture_normal = ExtResource("7_6fjuv")
 script = ExtResource("3_meyqc")
 level = ExtResource("6_hkdsq")
+level_number = 3
 
 [node name="Level4" type="TextureButton" parent="." unique_id=248353833]
+visible = false
 layout_mode = 0
-offset_left = 517.0
-offset_top = 164.0
-offset_right = 557.0
-offset_bottom = 204.0
-texture_normal = ExtResource("1_52t7l")
+offset_left = 463.0
+offset_top = 93.0
+offset_right = 566.0
+offset_bottom = 274.0
+disabled = true
+texture_normal = ExtResource("9_imhhh")
 script = ExtResource("3_meyqc")
 level = ExtResource("7_7knq8")
+level_number = 4
+
+[node name="Button" type="Button" parent="." unique_id=149337842]
+visible = false
+layout_mode = 0
+offset_left = 479.0
+offset_top = 324.0
+offset_right = 637.0
+offset_bottom = 355.0
+disabled = true
+text = "Super Secret Tower"
+script = ExtResource("11_7knq8")
+level = ExtResource("12_6fjuv")
+level_number = 5
 
 [connection signal="button_down" from="Level1" to="Level1" method="_on_button_down"]
 [connection signal="button_down" from="Level2" to="Level2" method="_on_button_down"]
 [connection signal="button_down" from="Level3" to="Level3" method="_on_button_down"]
 [connection signal="button_down" from="Level4" to="Level4" method="_on_button_down"]
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]

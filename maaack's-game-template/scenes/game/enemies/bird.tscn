@@ -149,7 +149,7 @@ texture_filter = 1
 texture = SubResource("PortableCompressedTexture2D_q4v3t")
 hframes = 5
 vframes = 5
-frame = 19
+frame = 13
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": true,
 "pending_changes": {}

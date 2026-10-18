@@ -3,6 +3,8 @@ extends Area2D
 # exported for use in anim player
 @export var repaired: bool = false
 
+@export var level:int
+
 var can_repair: bool = false
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -17,6 +19,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if repaired:
+		if !anim_player.is_playing():
+			match level:
+				1:
+					Globals.level_1 = true
+				2:
+					Globals.level_2 = true
+				3:
+					Globals.level_3 = true
+				4:
+					Globals.level_4 = true
+			await get_tree().create_timer(1).timeout
+			get_tree().change_scene_to_file("res://scenes/menus/level_select_menu/new_level_select.tscn")
 		return
 	# only need to hold for 3 secs
 	if anim_player.current_animation == "repair" and \

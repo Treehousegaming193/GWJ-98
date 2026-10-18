@@ -682,6 +682,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
 
 [node name="TowerTop" parent="ParallaxPlayArea" unique_id=1510611229 instance=ExtResource("8_of8gv")]
 position = Vector2(319, -741)
+level = 1
 
 [node name="BigScaffoldingWithHazards" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=1471152589]
 tile_map_data = PackedByteArray("AAAFAPn/AQAAAAAAAQAEAPn/AQAAAAAAAQA=")
@@ -700,7 +701,7 @@ tile_map_data = PackedByteArray("AAAAAAYAAQABAAMAAAABAAYAAQACAAMAAAACAAYAAQACAAM
 tile_set = ExtResource("7_cdlpu")
 
 [node name="Bird" parent="." unique_id=546600612 instance=ExtResource("8_n5tg7")]
-position = Vector2(595, 74)
+position = Vector2(507, 30)
 
 [node name="Player" parent="." unique_id=1904716568 instance=ExtResource("2_xxrlb")]
 position = Vector2(313, 293)

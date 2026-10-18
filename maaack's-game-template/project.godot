@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Godot Wild Jam 98"
+config/name="Frobbert's Adventure"
 run/main_scene="res://scenes/opening/opening.tscn"
 config/features=PackedStringArray("4.7")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -30,6 +30,7 @@ PhantomCameraManager="*uid://duq6jhf6unyis"
 Wind="*uid://cqqpwoy6s707y"
 Audio="*uid://4ynrmxvkbqb6"
 PromptManager="*uid://b4y4u6j1k67lj"
+Globals="*uid://by66ybc48paer"
 
 [clean_copy_examples]
 

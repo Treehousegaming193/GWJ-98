@@ -622,6 +622,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
 
 [node name="TowerTop" parent="ParallaxPlayArea" unique_id=1510611229 instance=ExtResource("9_pwo7q")]
 position = Vector2(319, -741)
+level = 2
 
 [node name="BigScaffoldingWithHazards" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=1471152589]
 tile_map_data = PackedByteArray("AAAFAPn/AQAAAAAAAQAEAPn/AQAAAAAAAQA=")

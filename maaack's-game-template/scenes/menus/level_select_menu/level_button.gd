@@ -1,6 +1,7 @@
 extends TextureButton
 
 @export var level: PackedScene
+@export var level_number: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,7 +10,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Globals.level_1 and level_number == 2:
+		disabled = false
+		visible = true
+	if Globals.level_2 and level_number == 3:
+		disabled = false
+		visible = true
+	if Globals.level_3 and level_number == 4:
+		disabled = false
+		visible = true
 
 
 func _on_button_down() -> void:
