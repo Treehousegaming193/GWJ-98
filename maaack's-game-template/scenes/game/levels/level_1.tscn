@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dlt72e5cbd7j4"]
+
+[ext_resource type="PackedScene" uid="uid://d3ku87ac3ye83" path="res://scenes/game/levels/_tower_game_objects.tscn" id="1_hn12h"]
+[ext_resource type="PackedScene" uid="uid://bqu6bticf3v47" path="res://scenes/game/levels/level_1_tower.tscn" id="2_ihfcg"]
+
+[node name="Prototype" unique_id=1791909261 instance=ExtResource("1_hn12h")]
+
+[node name="Camera2D" parent="." index="2" unique_id=1171851274]
+physics_interpolation_mode = 0
+position = Vector2(313, 293)
+
+[node name="Level" parent="." index="10" unique_id=1101336715 instance=ExtResource("2_ihfcg")]

@@ -1,0 +1,197 @@
+[gd_scene format=4 uid="uid://jm37v1p4fe7a"]
+
+[ext_resource type="Script" uid="uid://dno7wkps5r88" path="res://scenes/game/levels/_tower_game_objects.gd" id="1_gud56"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_6212h"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_hjbca"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_dk8pa"]
+[ext_resource type="Shader" uid="uid://7pl6j8pqmhtw" path="res://scenes/game/levels/sky/starry_sky.gdshader" id="5_kky1o"]
+[ext_resource type="Texture2D" uid="uid://sdpd0764d0p0" path="res://assets/environment/signaltower1stem.png" id="6_c1s2b"]
+[ext_resource type="TileSet" uid="uid://mvwjgevdsysy" path="res://assets/tilesets/blockout_tiles_v2_nes_32x32.tres" id="7_vjo0g"]
+[ext_resource type="PackedScene" uid="uid://cmw0jwa2528eb" path="res://scenes/game/levels/tower_top/tower_top.tscn" id="8_6212h"]
+[ext_resource type="PackedScene" uid="uid://b4cag405lv1jg" path="res://scenes/game/enemies/bird.tscn" id="8_t2txq"]
+[ext_resource type="PackedScene" uid="uid://fjcitye4ap5c" path="res://scenes/game/characters/player.tscn" id="9_7rkx0"]
+[ext_resource type="PackedScene" uid="uid://dwci27dw0aoj2" path="res://scenes/death_zone.tscn" id="10_6xb76"]
+
+[sub_resource type="Resource" id="Resource_s6150"]
+script = ExtResource("4_dk8pa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmflf"]
+shader = ExtResource("5_kky1o")
+shader_parameter/horizontalMovement = 2.9802400103307036e-08
+shader_parameter/verticalMovement = 2.9802400103307036e-08
+shader_parameter/frequencyStar = 0.0
+shader_parameter/sizeStar = 10.0
+shader_parameter/brightnessStar = 1.0
+shader_parameter/shineFrequencyStar = 1.0
+shader_parameter/transparencyStar = 0.499999988824
+shader_parameter/starIterations = 1
+shader_parameter/frequencyBgStar = 0.99599999026407
+shader_parameter/shineFrequencyBgStar = 0.0
+shader_parameter/transparencyBgStar = 0.499999988824
+shader_parameter/colorBackground = Color(0.01773333, 0.0139999995, 0.07, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="Gradient" id="Gradient_1wjay"]
+offsets = PackedFloat32Array(0, 0.68192774)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kmflf"]
+gradient = SubResource("Gradient_1wjay")
+fill_from = Vector2(0, 0.34188035)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_s6150"]
+_data = PackedByteArray("AAADAAUAAAABAAAAgAIAAGgBAABABQAAUklGRjgFAABXRUJQVlA4TCwFAAAvf8JZEB8gECBTkizYIRAghClw5H5E5z+A1thAubVtuZVTfdnOwCFYgXHwuxiUxpM7jQjxEuDYfkzGo+7BYBDkOefeR4kcFcCI/juUZCVsoOU5MU2ePNB+w7vd88N/O/y3w387/LfDfzv8t8N/O/y3w3/7xsDOBv7Dfpmxn3ZrvHMf037aMRzHcaceeUWbFt+H4dldOX7zCN7PFHaghpzPDaxM7E/thz3YIX5QXzHu8Yaf0/ebtRtW9wCZiIzpB09Nu9X2U9Vtvgs2eQnpwza/urpdc8g8Nc0WH4ri9CN776GjZkrdNr9l0u6gG7YHNyVODHwuaYYPa63n9DijaZoxCJrPgGGB1Rb0CB0stcmj50JOZ3hJi6+zh5fpEeCmz/TJd2gGDRya0ypHTB77+w+vpnfbscJ7Bg4rrNesYB4f4BwtoMgEr4m7eDiH+r93V8y2Ab/lz+Bdx3JPiAfxv2mkUL9UdRYb1e5pffufNgbeEqLArAoBBntqKxd6E2cxHNL3+fxBWmVnn83RGcWoX0Jnl9SlD3X1yvXIGV//rluZCEWouSgJDUuoP71EFs2WpHLaP6w7JrJZKBMcalbMYUZ45E8V11QVmlOcH8RGX71fsFRyAXMpVwBJKhTG0FZcUwnVaTbXK3S/5sCxNNulq4BeM1oM3hOfcLQqbodjkitv/wvFcNAJkaUEoGkqJq46saE097VwMzU2zfWSLLKOPo+WF1qwW5iAtPiPlTjAhujDVA1noD2wRE4oopEcQmUaUCgGDk30sMmcacxhrjis7XT2t+OzqF2HsXHoo68koZApyAj+PoYm0m5lWLItcuyKOIQercfFY/jUOCXgyDugUC2rSuFL8J9E5sqmbOdRauE0gGhxIboklH2GqQsc90Jf4t8ZEU3Riav5/sTVGDl3BmYG/mGhzXQWloFOadpAAwmBeQFGS2qCE2elVkqCgUiT3DwdZcnfWyYxYEMI6HNJ2UcHTN3TX2giiJQ0mJiT2aI5pTmUSbIRjMJbjRlNBBGIDgyGp39wQuuAQ6hA1Aq5dFkUsyQpMt6r3giFTnMS3UVCO+VisQmqYqlEwQy2gpCsXY/krBa3Qnx7eFr4F0VGGGpFReCVwwfvz6Yl8o7aWJQgC5RV3tVVzv1oEiMKCVEy3aQnxD1gvKbOGT+pZ04Dl7JJbcyUGMSHU16wkusOulmUsBemh20my+QHk0mnO5CHXbiLf1bq6Hkg8yfRUFKM0RnQufONi13Iq9oML3Yq0ZirVojwxHvBG4w9TUCGv0PyTJ6rZoCJgOFicbNgGkpnICHSe+Gqy5KHU7xZ1/F8VcmjMBoy1kXAUB3LsBwGfY/Kb/tEGStSR3N0KU4ZW4lgCQcg1jgg6xt4DaQjD3F6FN5dkq7scaQuzmqYx95vd8GKqIQDPinpaUemzMyxnwA5DCAOP5O8ICxchDIxZzqe5E4gPiSFP26ZsVPuzVMjAu+1ft57VyKrc43uY4lPD1rwItUvAp6041tE/vydQBMaKq1ousUN/IIm4BbyRl40ffhEEi7P9WpwG8Cjr9bhuOiD0D0JX2BijPLolDuJtrJSYHIyOJyenHEreTuVwZSeIvmPB6sOollc6AOaigbQvMVi693Jv7q4Al+m64PkEFI+JHO901Pu4d5O489YrlqM3qY343IXIT0qgx4+mj9GIYy+91uytcSYfN/O2NFh3ds3YmXVWi5bhIxXc78Wy+2FohS4B2wJV+yR7f24rJ79Lc4InVefsN3zw387/Ldv6MwA")
+size_override = Vector2(640, 360)
+
+[node name="Prototype2" type="Node2D" unique_id=1069575446]
+script = ExtResource("1_gud56")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1171851274]
+physics_interpolation_mode = 1
+top_level = true
+position = Vector2(313, 220)
+limit_bottom = 400
+editor_draw_limits = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=205801438]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_6212h")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1895257931 node_paths=PackedStringArray("follow_target")]
+top_level = true
+position = Vector2(313, 293)
+script = ExtResource("3_hjbca")
+priority = 1
+follow_mode = 2
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_s6150")
+dead_zone_width = 0.75
+dead_zone_height = 0.25
+draw_limits = true
+limit_bottom = 400
+
+[node name="Darkness" type="CanvasModulate" parent="." unique_id=1292553863]
+visible = false
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Sky" type="CanvasLayer" parent="." unique_id=1693748395]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Sky" unique_id=1064427595]
+material = SubResource("ShaderMaterial_kmflf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizonGradient" type="TextureRect" parent="Sky" unique_id=341558685]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kmflf")
+
+[node name="ParallaxFarDunes" type="Parallax2D" parent="." unique_id=1267260339]
+scroll_scale = Vector2(0.8, 0.8)
+scroll_offset = Vector2(250, -50)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Dunes" type="Sprite2D" parent="ParallaxFarDunes" unique_id=1194060407]
+texture_filter = 1
+position = Vector2(320, 160)
+texture = SubResource("PortableCompressedTexture2D_s6150")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/background.aseprite",
+"source_uid": 7451051732235550988
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
+
+[node name="ParallaxNearDunes" type="Parallax2D" parent="." unique_id=877112562]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(640, 0)
+repeat_times = 3
+
+[node name="Dunes" type="Sprite2D" parent="ParallaxNearDunes" unique_id=184058327]
+texture_filter = 1
+position = Vector2(320, 160)
+texture = SubResource("PortableCompressedTexture2D_s6150")
+metadata/_aseprite_wizard_interface_config_ = {
+"layer_section": true,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 1,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://assets/environment/background.aseprite",
+"source_uid": 7451051732235550988
+}
+metadata/_aseprite_wizard_source_file_hash_ = "f3adee58833a23139a6459433dfc8f07"
+
+[node name="ParallaxPlayArea" type="Parallax2D" parent="." unique_id=988103286]
+
+[node name="TowerStem" type="Sprite2D" parent="ParallaxPlayArea" unique_id=1935268561]
+position = Vector2(-281, 170)
+texture = ExtResource("6_c1s2b")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxPlayArea" unique_id=2022790904]
+tile_map_data = PackedByteArray("AAAOAAoAAAABAAUAAAAOAAsAAAAAAAUAAAAPAAoAAAABAAUAAAAPAAsAAAAAAAUAAAAQAAoAAAABAAUAAAAQAAsAAAAAAAUAAAARAAoAAAABAAUAAAARAAsAAAAAAAUAAAASAAoAAAABAAUAAAASAAsAAAAAAAUAAAATAAoAAAABAAUAAAATAAsAAAAAAAUAAAAAAAoAAAABAAUAAAAAAAsAAAAAAAUAAAAAAAwAAAAAAAUAAAABAAoAAAABAAUAAAABAAsAAAAAAAUAAAABAAwAAAAAAAUAAAACAAoAAAABAAUAAAACAAsAAAAAAAUAAAACAAwAAAAAAAUAAAADAAoAAAABAAUAAAADAAsAAAAAAAUAAAADAAwAAAAAAAUAAAAEAAoAAAABAAUAAAAEAAsAAAAAAAUAAAAEAAwAAAAAAAUAAAAGAAoAAAABAAUAAAAGAAsAAAAAAAUAAAAHAAoAAAABAAUAAAAHAAsAAAAAAAUAAAAHAAwAAAAAAAUAAAAIAAoAAAABAAUAAAAIAAsAAAAAAAUAAAAIAAwAAAAAAAUAAAAJAAoAAAABAAUAAAAJAAsAAAAAAAUAAAAJAAwAAAAAAAUAAAAKAAoAAAABAAUAAAAKAAsAAAAAAAUAAAAKAAwAAAAAAAUAAAALAAoAAAABAAUAAAALAAsAAAAAAAUAAAALAAwAAAAAAAUAAAAMAAoAAAABAAUAAAAMAAsAAAAAAAUAAAAMAAwAAAAAAAUAAAANAAoAAAABAAUAAAANAAsAAAAAAAUAAAANAAwAAAAAAAUAAAAOAAwAAAAAAAUAAAAPAAwAAAAAAAUAAAAQAAwAAAAAAAUAAAARAAwAAAAAAAUAAAASAAwAAAAAAAUAAAATAAwAAAAAAAUAAAD//woAAAABAAUAAAD//wsAAAAAAAUAAAD//wwAAAAAAAUAAAD0/wsAAAAAAAUAAAD0/wwAAAAAAAUAAAD1/wsAAAAAAAUAAAD1/wwAAAAAAAUAAAD2/wsAAAAAAAUAAAD2/wwAAAAAAAUAAAD3/wsAAAAAAAUAAAD3/wwAAAAAAAUAAAD4/wsAAAAAAAUAAAD4/wwAAAAAAAUAAAD5/wsAAAAAAAUAAAD5/wwAAAAAAAUAAAD6/wsAAAAAAAUAAAD6/wwAAAAAAAUAAAD7/wsAAAAAAAUAAAD7/wwAAAAAAAUAAAD8/wsAAAAAAAUAAAD8/wwAAAAAAAUAAAD9/wsAAAAAAAUAAAD9/wwAAAAAAAUAAAD+/wsAAAAAAAUAAAD+/wwAAAAAAAUAAAAUAAsAAAAAAAUAAAAUAAwAAAAAAAUAAAAVAAsAAAAAAAUAAAAVAAwAAAAAAAUAAAAWAAsAAAAAAAUAAAAWAAwAAAAAAAUAAAAXAAsAAAAAAAUAAAAXAAwAAAAAAAUAAAAYAAsAAAAAAAUAAAAYAAwAAAAAAAUAAAAZAAsAAAAAAAUAAAAZAAwAAAAAAAUAAAAaAAsAAAAAAAUAAAAaAAwAAAAAAAUAAAAbAAsAAAAAAAUAAAAbAAwAAAAAAAUAAAAcAAsAAAAAAAUAAAAcAAwAAAAAAAUAAAAdAAsAAAAAAAUAAAAdAAwAAAAAAAUAAAAeAAsAAAAAAAUAAAAeAAwAAAAAAAUAAAAfAAsAAAAAAAUAAAAfAAwAAAAAAAUAAAAgAAsAAAAAAAUAAAAgAAwAAAAAAAUAAAAhAAsAAAAAAAUAAAAhAAwAAAAAAAUAAAAiAAsAAAAAAAUAAAAiAAwAAAAAAAUAAAAjAAsAAAAAAAUAAAAjAAwAAAAAAAUAAAAkAAsAAAAAAAUAAAAkAAwAAAAAAAUAAAAlAAsAAAAAAAUAAAAlAAwAAAAAAAUAAAD0/woAAAABAAUAAAD1/woAAAABAAUAAAD2/woAAAABAAUAAAD3/woAAAABAAUAAAD4/woAAAABAAUAAAD5/woAAAABAAUAAAD6/woAAAABAAUAAAD7/woAAAABAAUAAAD8/woAAAABAAUAAAD9/woAAAABAAUAAAD+/woAAAABAAUAAAAUAAoAAAABAAUAAAAVAAoAAAABAAUAAAAWAAoAAAABAAUAAAAXAAoAAAABAAUAAAAYAAoAAAABAAUAAAAZAAoAAAABAAUAAAAaAAoAAAABAAUAAAAbAAoAAAABAAUAAAAcAAoAAAABAAUAAAAdAAoAAAABAAUAAAAeAAoAAAABAAUAAAAfAAoAAAABAAUAAAAgAAoAAAABAAUAAAAhAAoAAAABAAUAAAAiAAoAAAABAAUAAAAjAAoAAAABAAUAAAAkAAoAAAABAAUAAAAlAAoAAAABAAUAAAAFAAsAAAAAAAUAAAAFAAwAAAAAAAUAAAAGAAwAAAAAAAUAAAAFAAoAAAABAAUAAAAFAAkAAAABAAUAAAAXAAUAAAAAAAUAAAAWAAUAAAAAAAUAAAAVAAUAAAAAAAUAAAAUAAUAAAAAAAUAAAATAAUAAAAAAAUAAAASAAUAAAAAAAUAAAARAAUAAAAAAAUAAAAPAAUAAAAAAAUAAAAOAAUAAAAAAAUAAAANAAUAAAAAAAUAAAAMAAUAAAAAAAUAAAALAAUAAAAAAAUAAAAKAAUAAAAAAAUAAAAJAAUAAAAAAAUAAAAIAAUAAAAAAAUAAAAHAAUAAAAAAAUAAAAGAAUAAAAAAAUAAAAFAAUAAAAAAAUAAAAEAAUAAAAAAAUAAAAHAAIAAAAAAAUAAAAIAAIAAAAAAAUAAAAJAAIAAAAAAAUAAAAKAAIAAAAAAAUAAAALAAIAAAAAAAUAAAAMAAIAAAAAAAUAAAANAAIAAAAAAAUAAAAOAAIAAAAAAAUAAAAPAAIAAAAAAAUAAAAQAAIAAAAAAAUAAAARAAIAAAAAAAUAAAASAAIAAAAAAAUAAAATAAIAAAAAAAUAAAAUAAIAAAAAAAUAAAAQAAUAAAAAAAUAAAAGAAIAAAAAAAUAAAAVAAIAAAAAAAUAAAAHAP//AAAAAAUAAAAIAP//AAAAAAUAAAAJAP//AAAAAAUAAAAKAP//AAAAAAUAAAALAP//AAAAAAUAAAAMAP//AAAAAAUAAAANAP//AAAAAAUAAAAOAP//AAAAAAUAAAAPAP//AAAAAAUAAAAQAP//AAAAAAUAAAARAP//AAAAAAUAAAASAP//AAAAAAUAAAATAP//AAAAAAUAAAAUAP//AAAAAAUAAAAIAPz/AAAAAAUAAAAJAPz/AAAAAAUAAAAKAPz/AAAAAAUAAAALAPz/AAAAAAUAAAAMAPz/AAAAAAUAAAANAPz/AAAAAAUAAAAOAPz/AAAAAAUAAAAPAPz/AAAAAAUAAAAQAPz/AAAAAAUAAAARAPz/AAAAAAUAAAASAPz/AAAAAAUAAAATAPz/AAAAAAUAAAAJAPn/AAAAAAUAAAAKAPn/AAAAAAUAAAALAPn/AAAAAAUAAAAMAPn/AAAAAAUAAAANAPn/AAAAAAUAAAAOAPn/AAAAAAUAAAAPAPn/AAAAAAUAAAAQAPn/AAAAAAUAAAARAPn/AAAAAAUAAAASAPn/AAAAAAUAAAAIAPb/AAAAAAUAAAAJAPb/AAAAAAUAAAAKAPb/AAAAAAUAAAALAPb/AAAAAAUAAAAQAPb/AAAAAAUAAAARAPb/AAAAAAUAAAASAPb/AAAAAAUAAAATAPb/AAAAAAUAAAAHAPP/AAAAAAUAAAAIAPP/AAAAAAUAAAAJAPP/AAAAAAUAAAAKAPP/AAAAAAUAAAASAPP/AAAAAAUAAAATAPP/AAAAAAUAAAAUAPP/AAAAAAUAAAARAPP/AAAAAAUAAAAGAPD/AAAAAAUAAAAHAPD/AAAAAAUAAAAIAPD/AAAAAAUAAAAJAPD/AAAAAAUAAAASAPD/AAAAAAUAAAATAPD/AAAAAAUAAAAUAPD/AAAAAAUAAAAVAPD/AAAAAAUAAAAEAO3/AAADAAUAAAAFAO3/AAADAAUAAAAGAO3/AAADAAUAAAAHAO3/AAADAAUAAAAIAO3/AAADAAUAAAAJAO3/AAADAAUAAAAKAO3/AAADAAUAAAALAO3/AAADAAUAAAAMAO3/AAADAAUAAAANAO3/AAADAAUAAAAOAO3/AAADAAUAAAAPAO3/AAADAAUAAAAQAO3/AAADAAUAAAARAO3/AAADAAUAAAASAO3/AAADAAUAAAATAO3/AAADAAUAAAAUAO3/AAADAAUAAAAVAO3/AAADAAUAAAAWAO3/AAADAAUAAAAXAO3/AAADAAUAAAA=")
+tile_set = ExtResource("7_vjo0g")
+
+[node name="TowerTopVisual" parent="ParallaxPlayArea" unique_id=1110413176 instance=ExtResource("8_6212h")]
+position = Vector2(446, -693)
+
+[node name="Bird" parent="." unique_id=546600612 instance=ExtResource("8_t2txq")]
+position = Vector2(650, 34)
+
+[node name="Bird2" parent="." unique_id=2093118329 instance=ExtResource("8_t2txq")]
+position = Vector2(327, -256)
+
+[node name="Player" parent="." unique_id=1904716568 instance=ExtResource("9_7rkx0")]
+position = Vector2(313, 293)
+slide_on_ceiling = false
+floor_stop_on_slope = false
+floor_max_angle = 0.87266463
+
+[node name="DeathZone" parent="." unique_id=119917810 instance=ExtResource("10_6xb76")]
+position = Vector2(1228, 71)
+scale = Vector2(1, 50)
+
+[node name="DeathZone2" parent="." unique_id=615105390 instance=ExtResource("10_6xb76")]
+position = Vector2(-392, 24)
+scale = Vector2(1, 50)

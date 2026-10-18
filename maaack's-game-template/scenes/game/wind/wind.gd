@@ -2,7 +2,7 @@ extends Node2D
 
 @export_category("Wind")
 @export var wind_direction_left: bool = false
-@export var wind_speed: float = 20
+@export var wind_speed: float = 2
 @export var max_wind_speed: float = 30
 @export var min_wind_speed: float = 10
 
@@ -21,6 +21,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	max_wind_speed = min_wind_speed + 4 * Globals.current_level
 	velocity_x = -wind_speed if wind_direction_left else wind_speed
 	if dynamic_wind_sfx_active:
 		audio.volume_db = remap(wind_speed, min_wind_speed, max_wind_speed, -12, 0)

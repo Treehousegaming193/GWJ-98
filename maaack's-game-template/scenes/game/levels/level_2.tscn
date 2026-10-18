@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bbc2am8psgp03"]
+
+[ext_resource type="PackedScene" uid="uid://d3ku87ac3ye83" path="res://scenes/game/levels/_tower_game_objects.tscn" id="1_a1esr"]
+[ext_resource type="PackedScene" uid="uid://dtupsaius3rxo" path="res://scenes/game/levels/level_2_tower.tscn" id="2_a1esr"]
+
+[node name="Prototype" unique_id=1791909261 instance=ExtResource("1_a1esr")]
+
+[node name="Level" parent="." index="10" unique_id=1711596868 instance=ExtResource("2_a1esr")]

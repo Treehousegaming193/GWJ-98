@@ -1,0 +1,43 @@
+[gd_resource type="Theme" format=3 uid="uid://bkiohkxcdio25"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wunrw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ta6tc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vy3s0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjokj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mkvbf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lgk5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8ha1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5od7i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n0skc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjokj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_op5lk"]
+
+[resource]
+Button/colors/icon_disabled_color = Color(0, 0, 0, 0.5019608)
+Button/colors/icon_focus_color = Color(0, 1, 0, 1)
+Button/colors/icon_hover_color = Color(0, 1, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 0, 1)
+Button/styles/disabled = SubResource("StyleBoxEmpty_wunrw")
+Button/styles/disabled_mirrored = SubResource("StyleBoxEmpty_ta6tc")
+Button/styles/focus = SubResource("StyleBoxEmpty_vy3s0")
+Button/styles/hover = SubResource("StyleBoxFlat_sjokj")
+Button/styles/hover_mirrored = SubResource("StyleBoxEmpty_mkvbf")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_0lgk5")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_s8ha1")
+Button/styles/normal = SubResource("StyleBoxEmpty_5od7i")
+Button/styles/normal_mirrored = SubResource("StyleBoxEmpty_n0skc")
+Button/styles/pressed = SubResource("StyleBoxEmpty_sjokj")
+Button/styles/pressed_mirrored = SubResource("StyleBoxEmpty_op5lk")

@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://drqrwghj0hhtu"]
 
+[ext_resource type="Script" uid="uid://8lmb1c0u4hdx" path="res://scenes/menus/level_select_menu/new_level_select.gd" id="1_lirng"]
+[ext_resource type="Theme" uid="uid://bkiohkxcdio25" path="res://assets/map/map_theme.tres" id="1_meyqc"]
 [ext_resource type="Texture2D" uid="uid://canlvx0ftc57m" path="res://assets/map/worldmap (blueprint).png" id="1_sjokj"]
+[ext_resource type="Texture2D" uid="uid://4rvb5p5lggo4" path="res://assets/map/1sttower.png" id="2_j8i20"]
+[ext_resource type="Texture2D" uid="uid://dcx151rapeb2h" path="res://assets/map/2ndtower.png" id="3_sjokj"]
+[ext_resource type="Texture2D" uid="uid://bbx7857ddu26o" path="res://assets/map/3rdtower.png" id="4_meyqc"]
+[ext_resource type="Texture2D" uid="uid://dt7w8o5hmlmqx" path="res://assets/map/5thtower.png" id="5_lirng"]
+[ext_resource type="Texture2D" uid="uid://tp5smoxff7r0" path="res://assets/map/4thtower.png" id="6_550iq"]
 
 [node name="WorldMap" type="CanvasLayer" unique_id=2038135407]
+script = ExtResource("1_lirng")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=887081769]
 anchors_preset = 15
@@ -10,24 +18,56 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_meyqc")
 texture = ExtResource("1_sjokj")
 
-[node name="Level1" type="TextureButton" parent="." unique_id=455375509]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level1" type="Button" parent="TextureRect" unique_id=1890939764]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 69.0
+offset_top = 87.0
+offset_right = 154.0
+offset_bottom = 226.0
+icon = ExtResource("2_j8i20")
 
-[node name="Level2" type="TextureButton" parent="." unique_id=654711774]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level2" type="Button" parent="TextureRect" unique_id=1326580219]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 87.0
+offset_right = 263.0
+offset_bottom = 229.0
+icon = ExtResource("3_sjokj")
 
-[node name="Level3" type="TextureButton" parent="." unique_id=1686234221]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level3" type="Button" parent="TextureRect" unique_id=81530303]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 278.0
+offset_top = 69.0
+offset_right = 381.0
+offset_bottom = 226.0
+icon = ExtResource("4_meyqc")
 
-[node name="Level4" type="TextureButton" parent="." unique_id=147115340]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level4" type="Button" parent="TextureRect" unique_id=1223807944]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 388.0
+offset_top = 123.0
+offset_right = 478.0
+offset_bottom = 228.0
+icon = ExtResource("5_lirng")
 
-[node name="Level5" type="TextureButton" parent="." unique_id=1386101457]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Level5" type="Button" parent="TextureRect" unique_id=245385035]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 479.0
+offset_top = 69.0
+offset_right = 582.0
+offset_bottom = 250.0
+icon = ExtResource("6_550iq")
+
+[connection signal="pressed" from="TextureRect/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="TextureRect/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="TextureRect/Level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="TextureRect/Level4" to="." method="_on_level_4_pressed"]
+[connection signal="pressed" from="TextureRect/Level5" to="." method="_on_level_5_pressed"]
