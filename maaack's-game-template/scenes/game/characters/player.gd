@@ -38,19 +38,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_dir = Input.get_axis("move_left", "move_right")
 	var want_jump = Input.is_action_just_released("jump")
 	var want_charge_jump = Input.is_action_pressed("jump")
-
-	set_collision_layer_value(1, !in_debug)
-	set_collision_mask_value(1, !in_debug)
-	if in_debug:
-		set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
-		velocity = input_dir * 120
-		move_and_slide()
-		return
-	else:
-		set_motion_mode(CharacterBody2D.MOTION_MODE_GROUNDED)
 
 	if is_on_floor():
 		velocity = Vector2.ZERO
@@ -60,7 +50,7 @@ func _physics_process(delta: float) -> void:
 				jump_charge_secs = delta
 			jump_strength = jump_charge_secs * jump_charge_multiplier
 			prints("jump_charge_secs", jump_charge_secs, "jump strength", jump_strength)
-			velocity.x = input_dir.x * speed
+			velocity.x = input_dir * speed
 			velocity.y -= jump_speed * jump_strength
 			%JumpAudio.play()
 			# rest jump charge
@@ -88,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		jump_charge_audio.stop()
 		jump_strength_indicator.set_point_position(1, Vector2(0, 0))
 		velocity += get_gravity() * delta
-		velocity.x = lerp(velocity.x, input_dir.x * speed, delta * 10)
+		velocity.x = lerp(velocity.x, input_dir * speed, delta * 10)
 		# Apply wind to motion if not on floor
 		if Wind.wind_direction_left:
 			velocity.x -= Wind.wind_speed
@@ -98,7 +88,7 @@ func _physics_process(delta: float) -> void:
 			anim_player.play(ANIM[Anim.FALL])
 
 	if input_dir:
-		visual.flip_h = input_dir.x < 0
+		visual.flip_h = input_dir < 0
 	move_and_slide()
 
 	# Procedural scarf
@@ -135,5 +125,3 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_light"):
 		flashlight.visible = !flashlight.visible
-	elif event.is_action_pressed("debug") and OS.has_feature("debug"):
-		in_debug = !in_debug
